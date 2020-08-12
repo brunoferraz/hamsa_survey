@@ -16,8 +16,9 @@ class Survey:
         pass
     def pre_process(self):
         """ preprocess data from pandas dataframe
-        
+
         :return str: Report about colected data
         """
+        
         return self.report
         pass
