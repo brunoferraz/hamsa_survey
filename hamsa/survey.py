@@ -11,14 +11,16 @@ class Survey:
         :param pd.DataFrame _df: a pandas dataFrame
         """
         self.df     = _df
-        self.pre_process()
         self.report = ""
+        self.pre_process()
+        
         pass
     def pre_process(self):
         """ preprocess data from pandas dataframe
 
         :return str: Report about colected data
         """
+        print(self.df)
         
         return self.report
         pass

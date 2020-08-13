@@ -2,10 +2,11 @@ import pandas as pd
 import string
 from . import survey
 
-def read_csv(path = None) -> survey.Survey:
+def read_csv(path = None, token = ",") -> survey.Survey:
     """Reads a CSV file
 
     :param str path: indicates the file and the path to it
+    :param str token: token used to split the a file along the parsing step
     :return survey.Survey: The object Survey
     """
     if(path == None):
