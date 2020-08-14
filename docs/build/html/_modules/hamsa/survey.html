@@ -153,6 +153,7 @@
   <h1>Source code for hamsa.survey</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">question</span>
+<span class="kn">import</span> <span class="nn">hamsa</span> <span class="k">as</span> <span class="nn">hs</span>
 
 
 <div class="viewcode-block" id="Survey"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey">[docs]</a><span class="k">class</span> <span class="nc">Survey</span><span class="p">:</span>
@@ -163,15 +164,37 @@
 
 <span class="sd">        :param pd.DataFrame _df: a pandas dataFrame</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">df</span>     <span class="o">=</span> <span class="n">_df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span>         <span class="o">=</span> <span class="n">_df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">report</span>     <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span>       <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">list_label</span> <span class="o">=</span> <span class="p">[]</span>
+        
         <span class="bp">self</span><span class="o">.</span><span class="n">pre_process</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">pass</span>
 <div class="viewcode-block" id="Survey.pre_process"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.pre_process">[docs]</a>    <span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; preprocess data from pandas dataframe giving da report and default options</span>
-<span class="sd">        </span>
+        <span class="sd">&quot;&quot;&quot; preprocess data from pandas dataframe</span>
+
 <span class="sd">        :return str: Report about colected data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Find surveys size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Generate deafault labels</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="s2">&quot;pergunta_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">list_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+        
+        <span class="c1">#iterate along columns</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">question</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">20</span><span class="p">]</span>
+            <span class="c1"># print(type(column))</span>
+            <span class="n">question_type</span> <span class="o">=</span> <span class="n">hs</span><span class="o">.</span><span class="n">getType</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+            <span class="c1"># print(question_type)</span>
+            <span class="k">pass</span>
+
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span>
         <span class="k">pass</span></div></div>
 </pre></div>

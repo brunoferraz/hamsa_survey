@@ -12,6 +12,14 @@ Subpackages
 Submodules
 ----------
 
+hamsa.heuristics module
+-----------------------
+
+.. automodule:: hamsa.heuristics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 hamsa.survey module
 -------------------
 
