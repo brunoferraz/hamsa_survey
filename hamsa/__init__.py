@@ -2,7 +2,7 @@ import pandas as pd
 import string
 from . import survey
 from enum import Enum
-import hamsa.heuristics
+from . import heuristics
 
 
 
@@ -38,22 +38,11 @@ def getType(answers:pd.core.series.Series = None) -> QuestionType:
     :return Type: Which type of question is this
     """
     # verify if its a opened or closed question
-    # percent_unique = getPercentUniqueAnswer(answers=answers)
-    # print(percent_unique)
-    # a = answers.unique()
 
-    # verify if its a opened or closed question
-    # for i in answers:
-        # print(len(i))
-        # verify if all the answers has the same size
-            # if not probably open
-                # verify if there are some categories
-                    #  if not its OPENED FOR SURE
-                        # if it is opened its over for now
-                    #  if YES its CLOSED FOR SURE
-                        # if it is closed try to discover which kind of
-    
-    return QuestionType.OPENED
+    #If it is a Opened question the answers will probably be different, so the test is calculate the percent of unique questions. If it is greater than the THRESHOLD_UNIQUE the system will sugest that question has a openned answer
+    percent_unique = getPercentUniqueAnswer(answers=answers)
+    if(percent_unique > heuristics.THRESHOLD_UNIQUE):
+        return QuestionType.OPENED
     pass
 def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -> float:
     """Use statistics from pandas to check out the percent of unique ansers
@@ -62,20 +51,11 @@ def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -> float:
     :return float: Percent of unique answers
     """
     # Get statistic information from answers
-    # It can be acessed by the keys "count" "unique" "top" "frequency"
-    print(answers)
-    stat = answers.describe(include='all')
-    unique = stat["unique"]
-    count = stat["count"]
-    hasempty = answers.isna().values.any()
-    howmanyempty = answers.isna().sum()
-    # check if all questions were answered
-    if(hasempty):
-        # YES
-        howmanyanswered = count - howmanyempty
-        # NOT
-    else:
-        howmanyanswered = count
-    percent = (unique * 100) / howmanyanswered
+    # get how many ansers are unique
+    unique = len(answers.unique())
+    # get the number of entries
+    count = answers.count()
+    percent = (unique*100) / count
     return percent
+
     pass

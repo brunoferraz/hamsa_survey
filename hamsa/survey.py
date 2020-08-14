@@ -3,6 +3,7 @@ from . import question
 import hamsa as hs
 
 
+
 class Survey:
     """ Data Structure that stores information about how data will be exported to neural network"""
 
@@ -36,12 +37,15 @@ class Survey:
         #iterate along columns
         for i in range(self.size):
             question = self.df.columns[i]
-            print(">>>>>>", question)
+            # print(">>>>>>", question)
             column = self.df.iloc[:,i]
-            print(type(column))
+            # print(type(column))
             question_type = hs.getType(column)
-            # print(question_type)
+            if(question_type == hs.QuestionType.OPENED):
+                """
+                todo: Look for false positive
+                """
+                print(i, question)
             pass
-
         return self.report
         pass
