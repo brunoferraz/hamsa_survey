@@ -1,11 +1,9 @@
 import pandas as pd
 import string
-from . import survey
 from enum import Enum
 from . import heuristics
-
-
-
+# from . import question
+from . import survey
 
 class QuestionType(Enum):
     OPENED = 0

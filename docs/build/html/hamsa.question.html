@@ -168,26 +168,39 @@
             
   <div class="section" id="hamsa-question-package">
 <h1>hamsa.question package<a class="headerlink" href="#hamsa-question-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-hamsa.question.ClosedQuestion">
-<span id="hamsa-question-closedquestion-module"></span><h2>hamsa.question.ClosedQuestion module<a class="headerlink" href="#module-hamsa.question.ClosedQuestion" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-hamsa.question.IQuestion">
-<span id="hamsa-question-iquestion-module"></span><h2>hamsa.question.IQuestion module<a class="headerlink" href="#module-hamsa.question.IQuestion" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="hamsa.question.IQuestion.IQuestion">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.IQuestion.</code><code class="sig-name descname">IQuestion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question/IQuestion.html#IQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.IQuestion" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-hamsa.question.OpenedQuestion">
-<span id="hamsa-question-openedquestion-module"></span><h2>hamsa.question.OpenedQuestion module<a class="headerlink" href="#module-hamsa.question.OpenedQuestion" title="Permalink to this headline">¶</a></h2>
-</div>
 <div class="section" id="module-hamsa.question">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hamsa.question" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="hamsa.question.ClosedQuestion">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ClosedQuestion</code><a class="reference internal" href="_modules/hamsa/question.html#ClosedQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestion" title="hamsa.question.IQuestion"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestion</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="hamsa.question.IQuestion">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">IQuestion</code><a class="reference internal" href="_modules/hamsa/question.html#IQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class for survey’s questions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – question label to be indentified on neural network. It must be one word at last</p></li>
+<li><p><strong>question</strong> (<em>str</em>) – </p></li>
+<li><p><strong>answer</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Todo</dt>
+<dd class="field-even"><p>Develop methods __str__, __repr__, __call__ in order to make save and load</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="hamsa.question.OpenedQuestion">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">OpenedQuestion</code><a class="reference internal" href="_modules/hamsa/question.html#OpenedQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.OpenedQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestion" title="hamsa.question.IQuestion"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestion</span></code></a></p>
+</dd></dl>
+
 </div>
 </div>
 

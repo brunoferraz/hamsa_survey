@@ -1,8 +1,6 @@
 import pandas as pd
-from . import question
 import hamsa as hs
-
-
+# from . import question
 
 class Survey:
     """ Data Structure that stores information about how data will be exported to neural network"""
@@ -16,7 +14,7 @@ class Survey:
         self.report     = ""
         self.size       = 0
         self.list_label = []
-        
+        self.list_questions = []
         self.pre_process()
         pass
     def pre_process(self):
@@ -44,6 +42,8 @@ class Survey:
             question_type = hs.getType(column)
             if(question_type == hs.QuestionType.OPENED):
                 print(i, "opened >>" ,question)
+                
+                
             elif(question_type == hs.QuestionType.CLOSED):
                 print(i, "closed >>" , question)
             pass

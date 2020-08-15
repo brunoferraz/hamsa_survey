@@ -194,6 +194,8 @@
     <span class="n">percent_unique</span> <span class="o">=</span> <span class="n">getPercentUniqueAnswer</span><span class="p">(</span><span class="n">answers</span><span class="o">=</span><span class="n">answers</span><span class="p">)</span>
     <span class="k">if</span><span class="p">(</span><span class="n">percent_unique</span> <span class="o">&gt;</span> <span class="n">heuristics</span><span class="o">.</span><span class="n">THRESHOLD_UNIQUE</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span>
     <span class="k">pass</span></div>
 <div class="viewcode-block" id="getPercentUniqueAnswer"><a class="viewcode-back" href="../hamsa.html#hamsa.getPercentUniqueAnswer">[docs]</a><span class="k">def</span> <span class="nf">getPercentUniqueAnswer</span><span class="p">(</span><span class="n">answers</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Use statistics from pandas to check out the percent of unique ansers</span>
