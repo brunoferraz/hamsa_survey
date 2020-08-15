@@ -153,7 +153,7 @@
 <span class="kn">import</span> <span class="nn">string</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">survey</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">import</span> <span class="nn">hamsa.heuristics</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">heuristics</span>
 
 
 
@@ -190,21 +190,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># verify if its a opened or closed question</span>
 
-
-
-
-    <span class="c1"># verify if its a opened or closed question</span>
-    <span class="c1"># for i in answers:</span>
-        <span class="c1"># print(len(i))</span>
-        <span class="c1"># verify if all the answers has the same size</span>
-            <span class="c1"># if not probably open</span>
-                <span class="c1"># verify if there are some categories</span>
-                    <span class="c1">#  if not its OPENED FOR SURE</span>
-                        <span class="c1"># if it is opened its over for now</span>
-                    <span class="c1">#  if YES its CLOSED FOR SURE</span>
-                        <span class="c1"># if it is closed try to discover which kind of</span>
-    
-    <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span>
+    <span class="c1">#If it is a Opened question the answers will probably be different, so the test is calculate the percent of unique questions. If it is greater than the THRESHOLD_UNIQUE the system will sugest that question has a openned answer</span>
+    <span class="n">percent_unique</span> <span class="o">=</span> <span class="n">getPercentUniqueAnswer</span><span class="p">(</span><span class="n">answers</span><span class="o">=</span><span class="n">answers</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">percent_unique</span> <span class="o">&gt;</span> <span class="n">heuristics</span><span class="o">.</span><span class="n">THRESHOLD_UNIQUE</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span>
     <span class="k">pass</span></div>
 <div class="viewcode-block" id="getPercentUniqueAnswer"><a class="viewcode-back" href="../hamsa.html#hamsa.getPercentUniqueAnswer">[docs]</a><span class="k">def</span> <span class="nf">getPercentUniqueAnswer</span><span class="p">(</span><span class="n">answers</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">Series</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Use statistics from pandas to check out the percent of unique ansers</span>
@@ -213,21 +202,13 @@
 <span class="sd">    :return float: Percent of unique answers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Get statistic information from answers</span>
-    <span class="c1"># It can be acessed by the keys &quot;count&quot; &quot;unique&quot; &quot;top&quot; &quot;frequency&quot;</span>
-    <span class="n">stat</span> <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-    <span class="n">unique</span> <span class="o">=</span> <span class="n">stat</span><span class="p">[</span><span class="s2">&quot;unique&quot;</span><span class="p">]</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">stat</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
-    <span class="n">hasempty</span> <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-    <span class="n">howmanyempty</span> <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="c1"># check if all questions were answered</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">hasempty</span><span class="p">):</span>
-        <span class="c1"># YES</span>
-        <span class="n">howmanyanswered</span> <span class="o">=</span> <span class="n">count</span> <span class="o">-</span> <span class="n">howmanyempty</span>
-        <span class="c1"># NOT</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">howmanyanswered</span> <span class="o">=</span> <span class="n">count</span>
-    <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">unique</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="n">howmanyanswered</span>
+    <span class="c1"># get how many ansers are unique</span>
+    <span class="n">unique</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">answers</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="c1"># get the number of entries</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">unique</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="n">count</span>
     <span class="k">return</span> <span class="n">percent</span>
+
     <span class="k">pass</span></div>
 </pre></div>
 

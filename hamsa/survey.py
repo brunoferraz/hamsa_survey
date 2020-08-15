@@ -22,6 +22,7 @@ class Survey:
     def pre_process(self):
         """ preprocess data from pandas dataframe
 
+        :todo: Look for false positive
         :return str: Report about colected data
         """
 
@@ -42,10 +43,9 @@ class Survey:
             # print(type(column))
             question_type = hs.getType(column)
             if(question_type == hs.QuestionType.OPENED):
-                """
-                todo: Look for false positive
-                """
-                print(i, question)
+                print(i, "opened >>" ,question)
+            elif(question_type == hs.QuestionType.CLOSED):
+                print(i, "closed >>" , question)
             pass
         return self.report
         pass

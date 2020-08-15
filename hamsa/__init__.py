@@ -43,6 +43,8 @@ def getType(answers:pd.core.series.Series = None) -> QuestionType:
     percent_unique = getPercentUniqueAnswer(answers=answers)
     if(percent_unique > heuristics.THRESHOLD_UNIQUE):
         return QuestionType.OPENED
+    else:
+        return QuestionType.CLOSED
     pass
 def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -> float:
     """Use statistics from pandas to check out the percent of unique ansers
