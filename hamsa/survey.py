@@ -1,6 +1,6 @@
 import pandas as pd
 import hamsa as hs
-# from . import question
+from . import question
 
 class Survey:
     """ Data Structure that stores information about how data will be exported to neural network"""

@@ -2,7 +2,7 @@ import pandas as pd
 import string
 from enum import Enum
 from . import heuristics
-# from . import question
+from . import question
 from . import survey
 
 class QuestionType(Enum):

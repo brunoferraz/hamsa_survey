@@ -1,5 +1,3 @@
-import IQuestion, OpenedQuestion, ClosedQuestion
-
 class IQuestion:
     """
     Abstract class for survey's questions
@@ -18,12 +16,17 @@ class IQuestion:
 
 class OpenedQuestion(IQuestion):
     def __init__(self, _survey = None, _label = None, _question = None, _answer = None):
-        super.__init__(_survey, _label, _question, _answer):
+        super.__init__(_survey, _label, _question, _answer)
         pass
     pass
+# class OpenedQuestion(IQuestion):
+#     def __init__(self, _survey = None, _label = None, _question = None, _answer = None):
+#         super.__init__(_survey, _label, _question, _answer):
+#         pass
+#     pass
 
-class ClosedQuestion(IQuestion):
-    def __init__(self, _survey = None, _label, _question, _answer):
-        super.__init__(_survey, _label, _survey, _question, _answer):
-        pass
-    pass
+# class ClosedQuestion(IQuestion):
+#     def __init__(self, _survey = None, _label, _question, _answer):
+#         super.__init__(_survey, _label, _survey, _question, _answer):
+#         pass
+#     pass
