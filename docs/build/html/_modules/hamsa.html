@@ -151,18 +151,17 @@
   <h1>Source code for hamsa</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">string</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">survey</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">heuristics</span>
-
-
-
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">question</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">survey</span>
 
 <div class="viewcode-block" id="QuestionType"><a class="viewcode-back" href="../hamsa.html#hamsa.QuestionType">[docs]</a><span class="k">class</span> <span class="nc">QuestionType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="n">OPENED</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">CLOSED</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">CLOSED_MULTIPLE_CHOICE</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">CLOSED_CHECKBOX</span> <span class="o">=</span> <span class="mi">3</span></div>
+    <span class="n">UNKNOW</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">OPENED</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CLOSED</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">CLOSED_MULTIPLE_CHOICE</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">CLOSED_CHECKBOX</span> <span class="o">=</span> <span class="mi">4</span></div>
 
 
 <div class="viewcode-block" id="read_csv"><a class="viewcode-back" href="../hamsa.html#hamsa.read_csv">[docs]</a><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">survey</span><span class="o">.</span><span class="n">Survey</span><span class="p">:</span>

@@ -6,10 +6,11 @@ from . import question
 from . import survey
 
 class QuestionType(Enum):
-    OPENED = 0
-    CLOSED = 1
-    CLOSED_MULTIPLE_CHOICE = 2
-    CLOSED_CHECKBOX = 3
+    UNKNOW = 0
+    OPENED = 1
+    CLOSED = 2
+    CLOSED_MULTIPLE_CHOICE = 3
+    CLOSED_CHECKBOX = 4
 
 
 def read_csv(path = None, token = ",",encoding ='utf8') -> survey.Survey:

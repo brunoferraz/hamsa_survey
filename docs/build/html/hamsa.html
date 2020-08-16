@@ -37,7 +37,6 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Hamsa Survey v 0.0.1 documentation" href="index.html"/>
         <link rel="up" title="hamsa" href="modules.html"/>
-        <link rel="next" title="hamsa.question package" href="hamsa.question.html"/>
         <link rel="prev" title="hamsa" href="modules.html"/> 
 
   
@@ -88,12 +87,9 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">hamsa</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">hamsa package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="hamsa.question.html">hamsa.question package</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-hamsa.heuristics">hamsa.heuristics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-hamsa.question">hamsa.question module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-hamsa.survey">hamsa.survey module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-hamsa">Module contents</a></li>
 </ul>
@@ -167,17 +163,6 @@
             
   <div class="section" id="hamsa-package">
 <h1>hamsa package<a class="headerlink" href="#hamsa-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="hamsa.question.html">hamsa.question package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hamsa.question.html#module-hamsa.question">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -190,6 +175,51 @@
 </dd>
 </dl>
 </div>
+<div class="section" id="module-hamsa.question">
+<span id="hamsa-question-module"></span><h2>hamsa.question module<a class="headerlink" href="#module-hamsa.question" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="hamsa.question.ClosedQuestion">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ClosedQuestion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_columnIndex</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestion" title="hamsa.question.IQuestion"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestion</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="hamsa.question.IQuestion">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">IQuestion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_columnIndex</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class for survey’s questions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_label</strong> (<em>str</em>) – question label to be indentified on neural network. It must be one word at last</p></li>
+<li><p><strong>_question</strong> (<em>str</em>) – </p></li>
+<li><p><strong>_answer</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Todo</dt>
+<dd class="field-even"><p>Develop methods __str__, __repr__, __call__ in order to make save and load</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="hamsa.question.IQuestion.getQuestion">
+<code class="sig-name descname">getQuestion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.getQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.getQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the question text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return str</dt>
+<dd class="field-odd"><p>This question’s text</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="hamsa.question.OpenedQuestion">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">OpenedQuestion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_columnIndex</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#OpenedQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.OpenedQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestion" title="hamsa.question.IQuestion"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestion</span></code></a></p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-hamsa.survey">
 <span id="hamsa-survey-module"></span><h2>hamsa.survey module<a class="headerlink" href="#module-hamsa.survey" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
@@ -198,9 +228,41 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Data Structure that stores information about how data will be exported to neural network</p>
 <dl class="py method">
+<dt id="hamsa.survey.Survey.getData">
+<code class="sig-name descname">getData</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">row</span></em>, <em class="sig-param"><span class="n">column</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.getData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.getData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query for some data from data frame using row and column as parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>row</strong> (<em>int</em>) – row you want data from</p></li>
+<li><p><strong>column</strong> (<em>int</em>) – column you want data from</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data from the row and column passed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.getQuestion">
+<code class="sig-name descname">getQuestion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ind</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.getQuestion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.getQuestion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the question question using the index passed as parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ind</strong> (<em>int</em>) – Index used to query the question from dataframe</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>question from the index question passed as parameter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.survey.Survey.pre_process">
 <code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.pre_process" title="Permalink to this definition">¶</a></dt>
 <dd><p>preprocess data from pandas dataframe</p>
+<p>This method try to figure out which type of each question. Its uses the Heuristic stored at THRESHOLD_UNIQUE.If you have more unique answers than the THRESHOLD_UNIQUE probably you have a opened question</p>
 <dl class="field-list simple">
 <dt class="field-odd">Todo</dt>
 <dd class="field-odd"><p>Look for false positive</p>
@@ -223,22 +285,27 @@
 <p>An enumeration.</p>
 <dl class="py attribute">
 <dt id="hamsa.QuestionType.CLOSED">
-<code class="sig-name descname">CLOSED</code><em class="property"> = 1</em><a class="headerlink" href="#hamsa.QuestionType.CLOSED" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CLOSED</code><em class="property"> = 2</em><a class="headerlink" href="#hamsa.QuestionType.CLOSED" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="hamsa.QuestionType.CLOSED_CHECKBOX">
-<code class="sig-name descname">CLOSED_CHECKBOX</code><em class="property"> = 3</em><a class="headerlink" href="#hamsa.QuestionType.CLOSED_CHECKBOX" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CLOSED_CHECKBOX</code><em class="property"> = 4</em><a class="headerlink" href="#hamsa.QuestionType.CLOSED_CHECKBOX" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="hamsa.QuestionType.CLOSED_MULTIPLE_CHOICE">
-<code class="sig-name descname">CLOSED_MULTIPLE_CHOICE</code><em class="property"> = 2</em><a class="headerlink" href="#hamsa.QuestionType.CLOSED_MULTIPLE_CHOICE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CLOSED_MULTIPLE_CHOICE</code><em class="property"> = 3</em><a class="headerlink" href="#hamsa.QuestionType.CLOSED_MULTIPLE_CHOICE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="hamsa.QuestionType.OPENED">
-<code class="sig-name descname">OPENED</code><em class="property"> = 0</em><a class="headerlink" href="#hamsa.QuestionType.OPENED" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">OPENED</code><em class="property"> = 1</em><a class="headerlink" href="#hamsa.QuestionType.OPENED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="hamsa.QuestionType.UNKNOW">
+<code class="sig-name descname">UNKNOW</code><em class="property"> = 0</em><a class="headerlink" href="#hamsa.QuestionType.UNKNOW" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -298,8 +365,6 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="hamsa.question.html" class="btn btn-neutral float-right" title="hamsa.question package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="modules.html" class="btn btn-neutral" title="hamsa" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
