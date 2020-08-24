@@ -154,8 +154,10 @@
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">import</span> <span class="nn">abc</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">heuristics</span>
+<span class="kn">import</span> <span class="nn">hamsa.survey</span>
+<span class="kn">import</span> <span class="nn">hamsa.question</span>
 <span class="c1"># from . import question</span>
-<span class="kn">from</span> <span class="nn">hamsa</span> <span class="kn">import</span> <span class="n">survey</span>
+
 
 <span class="c1"># class QuestionType(Enum):</span>
 <span class="c1">#     UNKNOW = 0</span>
@@ -178,7 +180,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="n">token</span><span class="p">)</span>
         <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">_lib</span><span class="o">.</span><span class="n">infer_dtype</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">survey</span><span class="o">.</span><span class="n">Survey</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">hamsa</span><span class="o">.</span><span class="n">survey</span><span class="o">.</span><span class="n">Survey</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">s</span>
     <span class="k">pass</span></div>
 
@@ -197,6 +199,7 @@
 <span class="c1">#     else:</span>
 <span class="c1">#         return QuestionType.CLOSED</span>
 <span class="c1">#     pass</span>
+
 <span class="c1"># def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -&gt; float:</span>
 <span class="c1">#     &quot;&quot;&quot;Use statistics from pandas to check out the percent of unique ansers</span>
 

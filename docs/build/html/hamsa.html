@@ -219,6 +219,11 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt id="hamsa.question.IQuestion.get_raw_answers">
+<em class="property">abstract </em><code class="sig-name descname">get_raw_answers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_raw_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_raw_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.question.IQuestion.get_type">
 <em class="property">abstract </em><code class="sig-name descname">get_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -257,7 +262,7 @@ This abstraction works like a Type for the question.</p>
 
 <dl class="py class">
 <dt id="hamsa.question.Question">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">Question</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">surveyParam</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#hamsa.survey.Survey" title="hamsa.survey.Survey">hamsa.survey.Survey</a></span></em>, <em class="sig-param"><span class="n">columnIndex</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">questionLabel</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">Question</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">surveyParam</span></em>, <em class="sig-param"><span class="n">columnIndex</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">questionLabel</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestion" title="hamsa.question.IQuestion"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestion</span></code></a></p>
 <dl class="py method">
 <dt id="hamsa.question.Question.change_type">
@@ -283,6 +288,11 @@ This abstraction works like a Type for the question.</p>
 <dl class="py method">
 <dt id="hamsa.question.Question.get_label">
 <code class="sig-name descname">get_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.get_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.get_label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.Question.get_raw_answers">
+<code class="sig-name descname">get_raw_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.get_raw_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.get_raw_answers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -370,6 +380,11 @@ This abstraction works like a Type for the question.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_question_raw_answers">
+<em class="property">abstract </em><code class="sig-name descname">get_question_raw_answers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_question_raw_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_question_raw_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.survey.ISurvey.get_questions">
 <em class="property">abstract </em><code class="sig-name descname">get_questions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -407,8 +422,19 @@ This abstraction works like a Type for the question.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt id="hamsa.survey.Survey.get_question_raw_answers">
+<code class="sig-name descname">get_question_raw_answers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.series.Series<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_question_raw_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_question_raw_answers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get answers from a specific question</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return pandas.Series</dt>
+<dd class="field-odd"><p>answers organized in a pandas.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.survey.Survey.get_questions">
-<code class="sig-name descname">get_questions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_questions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
