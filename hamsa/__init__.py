@@ -1,16 +1,19 @@
 import pandas as pd
 import string
 from enum import Enum
+import abc
 from . import heuristics
-from . import question
-from . import survey
+import hamsa.survey
+import hamsa.question
+# from . import question
 
-class QuestionType(Enum):
-    UNKNOW = 0
-    OPENED = 1
-    CLOSED = 2
-    CLOSED_MULTIPLE_CHOICE = 3
-    CLOSED_CHECKBOX = 4
+
+# class QuestionType(Enum):
+#     UNKNOW = 0
+#     OPENED = 1
+#     CLOSED = 2
+#     CLOSED_MULTIPLE_CHOICE = 3
+#     CLOSED_CHECKBOX = 4
 
 
 def read_csv(path = None, token = ",",encoding ='utf8') -> survey.Survey:
@@ -26,37 +29,38 @@ def read_csv(path = None, token = ",",encoding ='utf8') -> survey.Survey:
     else:
         df = pd.read_csv(path, encoding = encoding, sep = token)
         df.apply(lambda x: pd._lib.infer_dtype(x.values))
-        s = survey.Survey(df)
+        s = hamsa.survey.Survey(df)
         return s
     pass
 
-def getType(answers:pd.core.series.Series = None) -> QuestionType:
-    """Analizes one question's answers in order to figure out its type.
+# def getType(answers:pd.core.series.Series = None) -> QuestionType:
+#     """Analizes one question's answers in order to figure out its type.
 
-    :param Series answers: Receives one columns from panda´s dataFrame. This must be one question´s all answers.
-    :return Type: Which type of question is this
-    """
-    # verify if its a opened or closed question
+#     :param Series answers: Receives one columns from panda´s dataFrame. This must be one question´s all answers.
+#     :return Type: Which type of question is this
+#     """
+#     # verify if its a opened or closed question
 
-    #If it is a Opened question the answers will probably be different, so the test is calculate the percent of unique questions. If it is greater than the THRESHOLD_UNIQUE the system will sugest that question has a openned answer
-    percent_unique = getPercentUniqueAnswer(answers=answers)
-    if(percent_unique > heuristics.THRESHOLD_UNIQUE):
-        return QuestionType.OPENED
-    else:
-        return QuestionType.CLOSED
-    pass
-def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -> float:
-    """Use statistics from pandas to check out the percent of unique ansers
+#     #If it is a Opened question the answers will probably be different, so the test is calculate the percent of unique questions. If it is greater than the THRESHOLD_UNIQUE the system will sugest that question has a openned answer
+#     percent_unique = getPercentUniqueAnswer(answers=answers)
+#     if(percent_unique > heuristics.THRESHOLD_UNIQUE):
+#         return QuestionType.OPENED
+#     else:
+#         return QuestionType.CLOSED
+#     pass
 
-    :param Series answers: Receives one columns from panda´s dataFrame. This must be one question´s all answers.
-    :return float: Percent of unique answers
-    """
-    # Get statistic information from answers
-    # get how many ansers are unique
-    unique = len(answers.unique())
-    # get the number of entries
-    count = answers.count()
-    percent = (unique*100) / count
-    return percent
+# def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -> float:
+#     """Use statistics from pandas to check out the percent of unique ansers
 
-    pass
+#     :param Series answers: Receives one columns from panda´s dataFrame. This must be one question´s all answers.
+#     :return float: Percent of unique answers
+#     """
+#     # Get statistic information from answers
+#     # get how many ansers are unique
+#     unique = len(answers.unique())
+#     # get the number of entries
+#     count = answers.count()
+#     percent = (unique*100) / count
+#     return percent
+
+#     pass

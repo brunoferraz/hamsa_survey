@@ -151,76 +151,127 @@
            <div itemprop="articleBody">
             
   <h1>Source code for hamsa.survey</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">hamsa</span> <span class="k">as</span> <span class="nn">hs</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">question</span>
+<span></span><span class="kn">import</span> <span class="nn">abc</span>
+<div class="viewcode-block" id="ISurvey"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey">[docs]</a><span class="k">class</span> <span class="nc">ISurvey</span><span class="p">(</span><span class="n">metaclass</span> <span class="o">=</span> <span class="n">abc</span><span class="o">.</span><span class="n">ABCMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Interface works as a FAÇADE for hamsa survey system. Futhermore, also works as MODEL from MVC pattern&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ISurvey.pre_process"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.pre_process">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_questions"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_questions_headings"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_headings">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_questions_headings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_question"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_question">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_question</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_instance"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_instance">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_answer"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_answer">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_answer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
 
-<div class="viewcode-block" id="Survey"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey">[docs]</a><span class="k">class</span> <span class="nc">Survey</span><span class="p">:</span>
+<div class="viewcode-block" id="Survey"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey">[docs]</a><span class="k">class</span> <span class="nc">Survey</span><span class="p">(</span><span class="n">ISurvey</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Data Structure that stores information about how data will be exported to neural network&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_df</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Constructor for Survey Object</span>
-
-<span class="sd">        :param pd.DataFrame _df: a pandas dataFrame</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">df</span>         <span class="o">=</span> <span class="n">_df</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">report</span>     <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">size</span>       <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">list_label</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">list_questions</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pre_process</span><span class="p">()</span>
-        <span class="k">pass</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__df</span> <span class="o">=</span> <span class="n">df</span>
 <div class="viewcode-block" id="Survey.pre_process"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.pre_process">[docs]</a>    <span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; preprocess data from pandas dataframe</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="Survey.get_questions"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="Survey.get_questions_headings"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_headings">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_headings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="Survey.get_question"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_question">[docs]</a>    <span class="k">def</span> <span class="nf">get_question</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="Survey.get_instance"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_instance">[docs]</a>    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="Survey.get_answer"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_answer">[docs]</a>    <span class="k">def</span> <span class="nf">get_answer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
 
-<span class="sd">        This method try to figure out which type of each question. Its uses the Heuristic stored at THRESHOLD_UNIQUE.If you have more unique answers than the THRESHOLD_UNIQUE probably you have a opened question</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># import hamsa as hs</span>
+<span class="c1"># from . import question</span>
 
-<span class="sd">        :todo: Look for false positive</span>
-<span class="sd">        :return str: Report about colected data</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="c1"># class Survey:</span>
+<span class="c1">#     &quot;&quot;&quot; Data Structure that stores information about how data will be exported to neural network&quot;&quot;&quot;</span>
 
-        <span class="c1"># Find surveys size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-        <span class="c1"># self.size = 1</span>
+<span class="c1">#     def __init__(self, _df):</span>
+<span class="c1">#         &quot;&quot;&quot; Constructor for Survey Object</span>
 
-        <span class="c1"># Generate deafault labels</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="s2">&quot;pergunta_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">list_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+<span class="c1">#         :param pd.DataFrame _df: a pandas dataFrame</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         self.df         = _df</span>
+<span class="c1">#         self.report     = {}</span>
+<span class="c1">#         self.size       = 0</span>
+<span class="c1">#         self.list_label = []</span>
+<span class="c1">#         self.list_questions = []</span>
+<span class="c1">#         self.list_opened_questions = []</span>
+<span class="c1">#         self.list_closed_questions = []</span>
+<span class="c1">#         self.pre_process()</span>
+<span class="c1">#         pass</span>
+<span class="c1">#     def pre_process(self):</span>
+<span class="c1">#         &quot;&quot;&quot; preprocess data from pandas dataframe</span>
+
+<span class="c1">#         This method try to figure out which type of each question. Its uses the Heuristic stored at THRESHOLD_UNIQUE.If you have more unique answers than the THRESHOLD_UNIQUE probably you have a opened question otherwise you probably you have a closed question.</span>
+<span class="c1">#         Since there are kinds of closed questions that commomly produces unique questions due to the huge number of categories combined, This step works like an oriented guess needed to be reviewed</span>
+
+<span class="c1">#         :todo: Look for false positive</span>
+<span class="c1">#         :return str: Report about colected data</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         # Find surveys size</span>
+<span class="c1">#         self.size = len(self.df.columns)</span>
+<span class="c1">#         # self.size = 1</span>
+
+<span class="c1">#         # Generate deafault labels</span>
+<span class="c1">#         for i in range(self.size):</span>
+<span class="c1">#             temp = &quot;pergunta_&quot; + str(i)</span>
+<span class="c1">#             self.list_label.append(temp)</span>
         
-        <span class="c1">#iterate along columns</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
-            <span class="n">question</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="c1"># print(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&quot;, question)</span>
-            <span class="n">column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
-            <span class="c1"># print(type(column))</span>
-            <span class="n">question_type</span> <span class="o">=</span> <span class="n">hs</span><span class="o">.</span><span class="n">getType</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">question_type</span> <span class="o">==</span> <span class="n">hs</span><span class="o">.</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span><span class="p">):</span>
-                <span class="n">temp</span> <span class="o">=</span> <span class="n">hs</span><span class="o">.</span><span class="n">question</span><span class="o">.</span><span class="n">OpenedQuestion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_label</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
-            <span class="k">elif</span><span class="p">(</span><span class="n">question_type</span> <span class="o">==</span> <span class="n">hs</span><span class="o">.</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span><span class="p">):</span>
-                <span class="n">temp</span> <span class="o">=</span> <span class="n">hs</span><span class="o">.</span><span class="n">question</span><span class="o">.</span><span class="n">ClosedQuestion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_label</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">list_questions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span></div>
-<div class="viewcode-block" id="Survey.getQuestion"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.getQuestion">[docs]</a>    <span class="k">def</span> <span class="nf">getQuestion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ind</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Query the question question using the index passed as parameter</span>
+<span class="c1">#         #iterate along columns</span>
+<span class="c1">#         for i in range(self.size):</span>
+<span class="c1">#             question = self.df.columns[i]</span>
+<span class="c1">#             # print(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&quot;, question)</span>
+<span class="c1">#             column = self.df.iloc[:,i]</span>
+<span class="c1">#             # print(type(column))</span>
+<span class="c1">#             question_type = hs.getType(column)</span>
+<span class="c1">#             temp = &quot;&quot;</span>
+<span class="c1">#             if(question_type == hs.QuestionType.OPENED):</span>
+<span class="c1">#                 temp = hs.question.OpenedQuestion(self, self.list_label[i], i)</span>
+<span class="c1">#                 self.list_opened_questions.append(i)</span>
+<span class="c1">#             elif(question_type == hs.QuestionType.CLOSED):</span>
+<span class="c1">#                 temp = hs.question.ClosedQuestion(self, self.list_label[i], i)</span>
+<span class="c1">#                 self.list_closed_questions.append(i)</span>
+<span class="c1">#             self.list_questions.append(temp)</span>
+<span class="c1">#         self.report[&quot;size&quot;] = self.size</span>
+<span class="c1">#         self.report[&quot;openQuestions&quot;] = len(self.list_opened_questions)</span>
+<span class="c1">#         self.report[&quot;closedQuestions&quot;] = len(self.list_closed_questions)</span>
+<span class="c1">#         return self.report</span>
+    
+<span class="c1">#     def getReportFormated(self):</span>
+        
+<span class="c1">#         pass</span>
+    
+<span class="c1">#     def getQuestion(self, ind):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Query the question question using the index passed as parameter</span>
 
-<span class="sd">        :param int ind: Index used to query the question from dataframe</span>
-<span class="sd">        :return: question from the index question passed as parameter</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span></div>
+<span class="c1">#         :param int ind: Index used to query the question from dataframe</span>
+<span class="c1">#         :return: question from the index question passed as parameter</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         return self.df.columns.values[ind]</span>
 
-<div class="viewcode-block" id="Survey.getData"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.getData">[docs]</a>    <span class="k">def</span> <span class="nf">getData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Query for some data from data frame using row and column as parameters</span>
+<span class="c1">#     def getData(self, row, column):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         Query for some data from data frame using row and column as parameters</span>
 
-<span class="sd">        :param int row: row you want data from</span>
-<span class="sd">        :param int column: column you want data from</span>
-<span class="sd">        :return: data from the row and column passed</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">r</span></div></div>
+<span class="c1">#         :param int row: row you want data from</span>
+<span class="c1">#         :param int column: column you want data from</span>
+<span class="c1">#         :return: data from the row and column passed</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         r = self.df.iloc[row, column]</span>
+<span class="c1">#         return r</span>
 
 </pre></div>
 
