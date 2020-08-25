@@ -8,6 +8,15 @@ class ISurvey(metaclass = abc.ABCMeta):
     @abc.abstractmethod
     def pre_process(self):
         raise NotImplementedError
+    
+    @abc.abstractmethod
+    def get_question(self, i:int):
+        raise NotImplementedError
+    @abc.abstractmethod
+    def get_question_heading(self, i:int):
+        raise NotImplementedError
+
+
     @abc.abstractmethod
     def get_questions(self) -> list:
         raise NotImplementedError
@@ -15,8 +24,9 @@ class ISurvey(metaclass = abc.ABCMeta):
     def get_questions_headings(self) -> list:
         raise NotImplementedError
     @abc.abstractmethod
-    def get_question(self, i:int):
+    def get_questions_by_type(self) -> list:
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_instance(self, i:int):
         raise NotImplementedError
@@ -27,33 +37,67 @@ class ISurvey(metaclass = abc.ABCMeta):
     def get_question_raw_answers(self, i:int):
         raise NotImplementedError
 
+
+    @abc.abstractmethod
+    def get_report(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def _generate_statistics(self):
+        raise NotImplementedError
+
+
 class Survey(ISurvey):
     """ Data Structure that stores information about how data will be exported to neural network"""
     def __init__(self, df):
-        
-        self.__df       = df
+        self.__df               = df
+        self.__list_questions__ = []
+        self.__info__           = {}
+
         self.pre_process()
+        self._generate_statistics()
+        temp = self.get_questions_by_type(hamsa.question.QuestionType.CLOSED_MULTIPLE_CHOICE)
+        # for i in temp:
+        #     print(i.get_categories())
+        # for i in temp:
+        #     print(i.get_heading() + " >>> " + repr(i.get_type()))
+
     def pre_process(self):
         size = len(self.__df.columns)
-        size = 1
+        # size = 1
         for i in range(size):
             label       = "pergunta_" + str(i)
             # question    = self.__df.columns[i]
             # column      = self.__df.iloc[:,i]
             temp        = hamsa.question.Question(self, i, str(label))
-            
+            self.__list_questions__.append(temp)
+        pass
 
-        pass
-    def get_questions(self, i:int):
-        pass
-    def get_questions_headings(self):
-        pass
     def get_question(self):
         pass
+
+    def get_question_heading(self, i):
+        return self.__df.columns[i]
+
+    def get_questions(self, i:int):
+        pass
+
+    def get_questions_headings(self):
+        pass
+
+    def get_questions_by_type(self, typewanted:hamsa.question.QuestionType):
+        list_temp = []
+        for  i in self.__list_questions__:
+            if(i.get_type() == typewanted):
+                list_temp.append(i)
+        return list_temp
+
     def get_instance(self, i):
         pass
+
     def get_answer(self, i, j):
         pass
+
     def get_question_raw_answers(self, i) -> pd.Series:
         """
         Get answers from a specific question
@@ -61,6 +105,36 @@ class Survey(ISurvey):
         :return pandas.Series: answers organized in a pandas.Series
         """
         return self.__df.iloc[:,i]
+
+
+
+    def get_report(self):
+        self._generate_statistics()
+        text = ""
+        for key in self.__info__:
+            text = text + str(key) + " >>>> " + str(self.__info__[key]) + "\n"
+        return text
+
+    def _generate_statistics(self):
+        """
+        This method is used to colect statistical information from survey
+        """
+        self.__info__["num_entries"]  = len(self.__df.index)
+        self.__info__["num_question"] = len(self.__df.columns)
+        openended = 0
+        closedended = 0
+        multiplechoice = 0
+        for i in self.__list_questions__:
+            if(i.get_type() == hamsa.question.QuestionType.OPENED):
+                openended = openended + 1
+            elif(i.get_type() == hamsa.question.QuestionType.CLOSED):
+                closedended = closedended + 1
+            elif(i.get_type() == hamsa.question.QuestionType.CLOSED_MULTIPLE_CHOICE):
+                multiplechoice = multiplechoice + 1
+
+        self.__info__["num_openended_questions"]        = openended
+        self.__info__["num_closedended_questions"]      = closedended
+        self.__info__["num_multiplechoice_questions"]   = multiplechoice
 
 # import pandas as pd
 # import hamsa as hs

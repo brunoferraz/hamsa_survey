@@ -13,6 +13,9 @@ class IQuestionState(metaclass = abc.ABCMeta):
     This abstraction works like a Type for the question. 
     """
     @abc.abstractmethod
+    def pre_process(self):
+        raise NotImplementedError
+    @abc.abstractmethod
     def get_answers(self):
         raise NotImplementedError
 
@@ -39,24 +42,31 @@ class IQuestion(metaclass = abc.ABCMeta):
     @abc.abstractmethod
     def get_id(self)->int:
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_label(self):
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_heading(self, i:int):
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_type(self):
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_type_string(self):
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_raw_answers(self, i:int):
         raise NotImplementedError
+
     @abc.abstractmethod
     def get_answers(self, i:int):
         raise NotImplementedError
+
     @abc.abstractmethod
     def change_type(self):
         raise NotImplementedError
@@ -78,13 +88,32 @@ class IQuestion(metaclass = abc.ABCMeta):
 """
 CONCRETE SECTION
 """
-class OpenEndedQuestion(IQuestionState):
+class ConcreteQuestionsState(IQuestionState):
+    def __init__(self, q):
+        self.__question__ = q
+        self.pre_process()
+    def pre_process(self):
+        pass
+    def get_answers(self):
+        pass
+class OpenEndedState(ConcreteQuestionsState):
     def get_answers(self):
         pass
 
-class ClosedEndedQuestion(IQuestionState):
+class ClosedEndedState(ConcreteQuestionsState):
+    def __init__(self, q):
+        super.__init__(q)
+        self.__categories__ = []
     def get_answers(self):
         pass
+class ClosedEndedMultipleChoiceState(ClosedEndedState):
+    def pre_process(self):
+        self.__categories__ = self.get_categories()
+        pass
+    def get_answers(self):
+        pass
+    def get_categories(self):
+        return self.__question__.get_raw_answers().unique()
 
 class Question(IQuestion):
     def __init__(self, surveyParam, columnIndex:int, questionLabel:str):
@@ -94,10 +123,8 @@ class Question(IQuestion):
         self.__questionType__   = QuestionType.UNKNOW
         self.__columnIndex__    = columnIndex
         self.__questionlabel__  = questionLabel
-        self.__listStates__     = {}
-        print(self.__questionType__)
+        self.__list_types__     = {}
         self.change_type(self._figure_out_type())
-        print(self.__questionType__)
         pass
     """
     PUBLIC IMPLEMENTATIONS
@@ -107,7 +134,8 @@ class Question(IQuestion):
     def get_label(self):
         pass
     def get_heading(self):
-        pass
+        return self.__survey__.get_question_heading(self.__columnIndex__)
+
     def get_type(self):
         """
         Method to get the question type
@@ -131,7 +159,10 @@ class Question(IQuestion):
         pass
     def change_type(self, questionTypeParam:QuestionType):
         """
-        Method used to change question type
+        Method used to change question type. It already invoke the the private method _create_type. 
+        There, the state will be created since it have not been created already
+
+        :param QuestionType questionTypeParam: Type of question you want to change into. 
         """
         self.__questionType__ = questionTypeParam
         self._create_type(questionTypeParam)
@@ -144,17 +175,28 @@ class Question(IQuestion):
         """
         Method that create Question types and register it into a Dictionary
         If the method has been created before, nothing happens
+
+        :param QuestionType questionTypeParam: Type of question you want to change into. 
         """
         if(questionTypeParam == QuestionType.OPENED):
-            self.__listStates__.setdefault(QuestionType.OPENED, OpenEndedQuestion())
+            self.__list_types__.setdefault(QuestionType.OPENED, OpenEndedState(self))
         elif(questionTypeParam == QuestionType.OPENED):
-            self.__listStates__.setdefault(QuestionType.CLOSED, ClosedEndedQuestion())
+            self.__list_types__.setdefault(QuestionType.CLOSED, ClosedEndedState(self))
+        elif(questionTypeParam == QuestionType.CLOSED_MULTIPLE_CHOICE):
+            self.__list_types__.setdefault(QuestionType.CLOSED_MULTIPLE_CHOICE, ClosedEndedMultipleChoiceState(self))
     def _remove_type(self, questionTypeParam):
-        if(questionTypeParam in self.__listStates__):
-            del self.__listStates__[questionTypeParam]
+        """
+        Remove an existing QuestionType from the list
+        """
+        if(questionTypeParam in self.__list_types__):
+            del self.__list_types__[questionTypeParam]
         pass
     
     def _figure_out_type(self):
+        """
+        Private method to figure out if the question is open-ended or closed-ended.
+        It is decided based on similarity between answers
+        """
         answers = self.get_raw_answers()
         unique  = len(answers.unique())
         count   = answers.count()
@@ -162,7 +204,10 @@ class Question(IQuestion):
         if(percent > heuristics.THRESHOLD_UNIQUE):
             return QuestionType.OPENED
         else:
-            return QuestionType.CLOSED
+            if(unique < heuristics.THRESHOLD_UNIQUE_MULTIPLE_CHOICE):
+                return QuestionType.CLOSED_MULTIPLE_CHOICE
+            else:
+                return QuestionType.CLOSED
         pass
 
 # import  hamsa as hs
