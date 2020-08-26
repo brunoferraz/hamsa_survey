@@ -12,6 +12,14 @@ hamsa.heuristics module
    :undoc-members:
    :show-inheritance:
 
+hamsa.instance module
+---------------------
+
+.. automodule:: hamsa.instance
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 hamsa.question module
 ---------------------
 

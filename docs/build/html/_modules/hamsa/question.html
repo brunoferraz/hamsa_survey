@@ -155,7 +155,6 @@
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">from</span> <span class="nn">hamsa</span> <span class="kn">import</span> <span class="n">heuristics</span>
 
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">ABSTRACTION SECTION</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -255,7 +254,7 @@
 
 <div class="viewcode-block" id="ClosedEndedState"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedState">[docs]</a><span class="k">class</span> <span class="nc">ClosedEndedState</span><span class="p">(</span><span class="n">ConcreteQuestionsState</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
-        <span class="nb">super</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__categories__</span> <span class="o">=</span> <span class="p">[]</span>
 <div class="viewcode-block" id="ClosedEndedState.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedState.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div></div>
@@ -283,9 +282,11 @@
 <span class="sd">    PUBLIC IMPLEMENTATIONS</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="Question.get_id"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id__</span></div>
+
 <div class="viewcode-block" id="Question.get_label"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.get_label">[docs]</a>    <span class="k">def</span> <span class="nf">get_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__questionlabel__</span></div>
+
 <div class="viewcode-block" id="Question.get_heading"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.get_heading">[docs]</a>    <span class="k">def</span> <span class="nf">get_heading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__survey__</span><span class="o">.</span><span class="n">get_question_heading</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__columnIndex__</span><span class="p">)</span></div>
 
@@ -362,52 +363,6 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span>
         <span class="k">pass</span></div>
-
-<span class="c1"># import  hamsa as hs</span>
-<span class="c1"># from . import survey</span>
-<span class="c1"># class IQuestion:</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     Abstract class for survey&#39;s questions</span>
-
-<span class="c1">#     :param str _survey: question label to be indentified on neural network. It must be one word at last</span>
-<span class="c1">#     :param str _question:</span>
-<span class="c1">#     :param str _columnIndex: </span>
-<span class="c1">#     :todo: Develop methods __str__, __repr__, __call__ in order to make save and load</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     def __init__(self, _survey =None, _label = None, _columnIndex = None):</span>
-<span class="c1">#         self.surveyPointer  = _survey</span>
-<span class="c1">#         self.label          = _label</span>
-<span class="c1">#         self.columnIndex    = _columnIndex</span>
-<span class="c1">#         self.type           = hs.QuestionType.UNKNOW</span>
-<span class="c1">#         self.enable         = True</span>
-<span class="c1">#         pass</span>
-<span class="c1">#     def getQuestion(self):</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         Return the question text</span>
-
-<span class="c1">#         :return str: This question&#39;s text</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         return self.surveyPointer.getQuestion(self.columnIndex)</span>
-<span class="c1">#     # def __str__(self):</span>
-<span class="c1">#     #     text = &quot;&quot;</span>
-<span class="c1">#     #     text = text + str(self.label) + &quot;\n&quot;</span>
-<span class="c1">#     #     text = text + str(self.type) + &quot;\n&quot;</span>
-<span class="c1">#     #     text = text + str(self.question)</span>
-<span class="c1">#     #     return text</span>
-
-<span class="c1"># class OpenedQuestion(IQuestion):</span>
-<span class="c1">#     def __init__(self, _survey = None, _label = None,_columnIndex = None):</span>
-<span class="c1">#         super().__init__(_survey, _label, _columnIndex)</span>
-<span class="c1">#         self.type = hs.QuestionType.OPENED</span>
-<span class="c1">#         pass</span>
-<span class="c1">#     pass</span>
-
-<span class="c1"># class ClosedQuestion(IQuestion):</span>
-<span class="c1">#     def __init__(self, _survey = None, _label = None,_columnIndex = None):</span>
-<span class="c1">#         super().__init__(_survey, _label, _columnIndex)</span>
-<span class="c1">#         self.type = hs.QuestionType.CLOSED</span>
-<span class="c1">#         pass</span>
-<span class="c1">#     pass</span>
 </pre></div>
 
            </div>
