@@ -156,16 +156,6 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">heuristics</span>
 <span class="kn">import</span> <span class="nn">hamsa.survey</span>
 <span class="kn">import</span> <span class="nn">hamsa.question</span>
-<span class="c1"># from . import question</span>
-
-
-<span class="c1"># class QuestionType(Enum):</span>
-<span class="c1">#     UNKNOW = 0</span>
-<span class="c1">#     OPENED = 1</span>
-<span class="c1">#     CLOSED = 2</span>
-<span class="c1">#     CLOSED_MULTIPLE_CHOICE = 3</span>
-<span class="c1">#     CLOSED_CHECKBOX = 4</span>
-
 
 <div class="viewcode-block" id="read_csv"><a class="viewcode-back" href="../hamsa.html#hamsa.read_csv">[docs]</a><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">survey</span><span class="o">.</span><span class="n">Survey</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Reads a CSV file</span>
@@ -183,38 +173,6 @@
         <span class="n">s</span> <span class="o">=</span> <span class="n">hamsa</span><span class="o">.</span><span class="n">survey</span><span class="o">.</span><span class="n">Survey</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">s</span>
     <span class="k">pass</span></div>
-
-<span class="c1"># def getType(answers:pd.core.series.Series = None) -&gt; QuestionType:</span>
-<span class="c1">#     &quot;&quot;&quot;Analizes one question&#39;s answers in order to figure out its type.</span>
-
-<span class="c1">#     :param Series answers: Receives one columns from panda´s dataFrame. This must be one question´s all answers.</span>
-<span class="c1">#     :return Type: Which type of question is this</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     # verify if its a opened or closed question</span>
-
-<span class="c1">#     #If it is a Opened question the answers will probably be different, so the test is calculate the percent of unique questions. If it is greater than the THRESHOLD_UNIQUE the system will sugest that question has a openned answer</span>
-<span class="c1">#     percent_unique = getPercentUniqueAnswer(answers=answers)</span>
-<span class="c1">#     if(percent_unique &gt; heuristics.THRESHOLD_UNIQUE):</span>
-<span class="c1">#         return QuestionType.OPENED</span>
-<span class="c1">#     else:</span>
-<span class="c1">#         return QuestionType.CLOSED</span>
-<span class="c1">#     pass</span>
-
-<span class="c1"># def getPercentUniqueAnswer(answers:pd.core.series.Series = None) -&gt; float:</span>
-<span class="c1">#     &quot;&quot;&quot;Use statistics from pandas to check out the percent of unique ansers</span>
-
-<span class="c1">#     :param Series answers: Receives one columns from panda´s dataFrame. This must be one question´s all answers.</span>
-<span class="c1">#     :return float: Percent of unique answers</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     # Get statistic information from answers</span>
-<span class="c1">#     # get how many ansers are unique</span>
-<span class="c1">#     unique = len(answers.unique())</span>
-<span class="c1">#     # get the number of entries</span>
-<span class="c1">#     count = answers.count()</span>
-<span class="c1">#     percent = (unique*100) / count</span>
-<span class="c1">#     return percent</span>
-
-<span class="c1">#     pass</span>
 </pre></div>
 
            </div>

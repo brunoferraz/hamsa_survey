@@ -2,7 +2,6 @@ import abc
 from enum import Enum
 from hamsa import heuristics
 
-
 """
 ABSTRACTION SECTION
 """
@@ -102,7 +101,7 @@ class OpenEndedState(ConcreteQuestionsState):
 
 class ClosedEndedState(ConcreteQuestionsState):
     def __init__(self, q):
-        super.__init__(q)
+        super().__init__(q)
         self.__categories__ = []
     def get_answers(self):
         pass
@@ -130,9 +129,11 @@ class Question(IQuestion):
     PUBLIC IMPLEMENTATIONS
     """
     def get_id(self):
-        pass
+        return self.__id__
+
     def get_label(self):
-        pass
+        return self.__questionlabel__
+
     def get_heading(self):
         return self.__survey__.get_question_heading(self.__columnIndex__)
 
@@ -209,49 +210,3 @@ class Question(IQuestion):
             else:
                 return QuestionType.CLOSED
         pass
-
-# import  hamsa as hs
-# from . import survey
-# class IQuestion:
-#     """
-#     Abstract class for survey's questions
-
-#     :param str _survey: question label to be indentified on neural network. It must be one word at last
-#     :param str _question:
-#     :param str _columnIndex: 
-#     :todo: Develop methods __str__, __repr__, __call__ in order to make save and load
-#     """
-#     def __init__(self, _survey =None, _label = None, _columnIndex = None):
-#         self.surveyPointer  = _survey
-#         self.label          = _label
-#         self.columnIndex    = _columnIndex
-#         self.type           = hs.QuestionType.UNKNOW
-#         self.enable         = True
-#         pass
-#     def getQuestion(self):
-#         """
-#         Return the question text
-
-#         :return str: This question's text
-#         """
-#         return self.surveyPointer.getQuestion(self.columnIndex)
-#     # def __str__(self):
-#     #     text = ""
-#     #     text = text + str(self.label) + "\n"
-#     #     text = text + str(self.type) + "\n"
-#     #     text = text + str(self.question)
-#     #     return text
-
-# class OpenedQuestion(IQuestion):
-#     def __init__(self, _survey = None, _label = None,_columnIndex = None):
-#         super().__init__(_survey, _label, _columnIndex)
-#         self.type = hs.QuestionType.OPENED
-#         pass
-#     pass
-
-# class ClosedQuestion(IQuestion):
-#     def __init__(self, _survey = None, _label = None,_columnIndex = None):
-#         super().__init__(_survey, _label, _columnIndex)
-#         self.type = hs.QuestionType.CLOSED
-#         pass
-#     pass

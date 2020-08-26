@@ -165,6 +165,9 @@
 <span class="sd">    The behavior used to this processed will change due to the question type.</span>
 <span class="sd">    This abstraction works like a Type for the question. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="IQuestionState.pre_process"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestionState.pre_process">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 <div class="viewcode-block" id="IQuestionState.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestionState.get_answers">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
@@ -192,24 +195,31 @@
 <div class="viewcode-block" id="IQuestion.get_id"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_id">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">int</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.get_label"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_label">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.get_heading"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_heading">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_heading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.get_type"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_type">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.get_type_string"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_type_string">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_type_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.get_raw_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_raw_answers">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.get_answers">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="IQuestion.change_type"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.IQuestion.change_type">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">change_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
@@ -231,13 +241,32 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">CONCRETE SECTION</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<div class="viewcode-block" id="OpenEndedQuestion"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.OpenEndedQuestion">[docs]</a><span class="k">class</span> <span class="nc">OpenEndedQuestion</span><span class="p">(</span><span class="n">IQuestionState</span><span class="p">):</span>
-<div class="viewcode-block" id="OpenEndedQuestion.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.OpenEndedQuestion.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ConcreteQuestionsState"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ConcreteQuestionsState">[docs]</a><span class="k">class</span> <span class="nc">ConcreteQuestionsState</span><span class="p">(</span><span class="n">IQuestionState</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__question__</span> <span class="o">=</span> <span class="n">q</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pre_process</span><span class="p">()</span>
+<div class="viewcode-block" id="ConcreteQuestionsState.pre_process"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ConcreteQuestionsState.pre_process">[docs]</a>    <span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="ConcreteQuestionsState.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ConcreteQuestionsState.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div></div>
+<div class="viewcode-block" id="OpenEndedState"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.OpenEndedState">[docs]</a><span class="k">class</span> <span class="nc">OpenEndedState</span><span class="p">(</span><span class="n">ConcreteQuestionsState</span><span class="p">):</span>
+<div class="viewcode-block" id="OpenEndedState.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.OpenEndedState.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div></div>
 
-<div class="viewcode-block" id="ClosedEndedQuestion"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedQuestion">[docs]</a><span class="k">class</span> <span class="nc">ClosedEndedQuestion</span><span class="p">(</span><span class="n">IQuestionState</span><span class="p">):</span>
-<div class="viewcode-block" id="ClosedEndedQuestion.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedQuestion.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ClosedEndedState"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedState">[docs]</a><span class="k">class</span> <span class="nc">ClosedEndedState</span><span class="p">(</span><span class="n">ConcreteQuestionsState</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+        <span class="nb">super</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__categories__</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="viewcode-block" id="ClosedEndedState.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedState.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div></div>
+<div class="viewcode-block" id="ClosedEndedMultipleChoiceState"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedMultipleChoiceState">[docs]</a><span class="k">class</span> <span class="nc">ClosedEndedMultipleChoiceState</span><span class="p">(</span><span class="n">ClosedEndedState</span><span class="p">):</span>
+<div class="viewcode-block" id="ClosedEndedMultipleChoiceState.pre_process"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedMultipleChoiceState.pre_process">[docs]</a>    <span class="k">def</span> <span class="nf">pre_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__categories__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_categories</span><span class="p">()</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="ClosedEndedMultipleChoiceState.get_answers"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedMultipleChoiceState.get_answers">[docs]</a>    <span class="k">def</span> <span class="nf">get_answers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+<div class="viewcode-block" id="ClosedEndedMultipleChoiceState.get_categories"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.ClosedEndedMultipleChoiceState.get_categories">[docs]</a>    <span class="k">def</span> <span class="nf">get_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__question__</span><span class="o">.</span><span class="n">get_raw_answers</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span></div></div>
 
 <div class="viewcode-block" id="Question"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question">[docs]</a><span class="k">class</span> <span class="nc">Question</span><span class="p">(</span><span class="n">IQuestion</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">surveyParam</span><span class="p">,</span> <span class="n">columnIndex</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">questionLabel</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
@@ -247,10 +276,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__questionType__</span>   <span class="o">=</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">UNKNOW</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__columnIndex__</span>    <span class="o">=</span> <span class="n">columnIndex</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__questionlabel__</span>  <span class="o">=</span> <span class="n">questionLabel</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__listStates__</span>     <span class="o">=</span> <span class="p">{}</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__questionType__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__list_types__</span>     <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">change_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_figure_out_type</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__questionType__</span><span class="p">)</span>
         <span class="k">pass</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    PUBLIC IMPLEMENTATIONS</span>
@@ -260,7 +287,8 @@
 <div class="viewcode-block" id="Question.get_label"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.get_label">[docs]</a>    <span class="k">def</span> <span class="nf">get_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span></div>
 <div class="viewcode-block" id="Question.get_heading"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.get_heading">[docs]</a>    <span class="k">def</span> <span class="nf">get_heading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__survey__</span><span class="o">.</span><span class="n">get_question_heading</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__columnIndex__</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Question.get_type"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.get_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method to get the question type</span>
@@ -284,7 +312,10 @@
         <span class="k">pass</span></div>
 <div class="viewcode-block" id="Question.change_type"><a class="viewcode-back" href="../../hamsa.html#hamsa.question.Question.change_type">[docs]</a>    <span class="k">def</span> <span class="nf">change_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">questionTypeParam</span><span class="p">:</span><span class="n">QuestionType</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Method used to change question type</span>
+<span class="sd">        Method used to change question type. It already invoke the the private method _create_type. </span>
+<span class="sd">        There, the state will be created since it have not been created already</span>
+
+<span class="sd">        :param QuestionType questionTypeParam: Type of question you want to change into. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__questionType__</span> <span class="o">=</span> <span class="n">questionTypeParam</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_type</span><span class="p">(</span><span class="n">questionTypeParam</span><span class="p">)</span>
@@ -297,17 +328,28 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method that create Question types and register it into a Dictionary</span>
 <span class="sd">        If the method has been created before, nothing happens</span>
+
+<span class="sd">        :param QuestionType questionTypeParam: Type of question you want to change into. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span><span class="p">(</span><span class="n">questionTypeParam</span> <span class="o">==</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__listStates__</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span><span class="p">,</span> <span class="n">OpenEndedQuestion</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__list_types__</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span><span class="p">,</span> <span class="n">OpenEndedState</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="k">elif</span><span class="p">(</span><span class="n">questionTypeParam</span> <span class="o">==</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__listStates__</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span><span class="p">,</span> <span class="n">ClosedEndedQuestion</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__list_types__</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span><span class="p">,</span> <span class="n">ClosedEndedState</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">questionTypeParam</span> <span class="o">==</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED_MULTIPLE_CHOICE</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__list_types__</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED_MULTIPLE_CHOICE</span><span class="p">,</span> <span class="n">ClosedEndedMultipleChoiceState</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">_remove_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">questionTypeParam</span><span class="p">):</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">questionTypeParam</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__listStates__</span><span class="p">):</span>
-            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__listStates__</span><span class="p">[</span><span class="n">questionTypeParam</span><span class="p">]</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove an existing QuestionType from the list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">questionTypeParam</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_types__</span><span class="p">):</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_types__</span><span class="p">[</span><span class="n">questionTypeParam</span><span class="p">]</span>
         <span class="k">pass</span>
     
     <span class="k">def</span> <span class="nf">_figure_out_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private method to figure out if the question is open-ended or closed-ended.</span>
+<span class="sd">        It is decided based on similarity between answers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">answers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_raw_answers</span><span class="p">()</span>
         <span class="n">unique</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">answers</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
         <span class="n">count</span>   <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -315,7 +357,10 @@
         <span class="k">if</span><span class="p">(</span><span class="n">percent</span> <span class="o">&gt;</span> <span class="n">heuristics</span><span class="o">.</span><span class="n">THRESHOLD_UNIQUE</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">OPENED</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">unique</span> <span class="o">&lt;</span> <span class="n">heuristics</span><span class="o">.</span><span class="n">THRESHOLD_UNIQUE_MULTIPLE_CHOICE</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED_MULTIPLE_CHOICE</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">QuestionType</span><span class="o">.</span><span class="n">CLOSED</span>
         <span class="k">pass</span></div>
 
 <span class="c1"># import  hamsa as hs</span>
