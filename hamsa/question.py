@@ -2,10 +2,11 @@ import abc
 from enum import Enum
 from hamsa import heuristics
 
+
 """
 ABSTRACTION SECTION
 """
-class IQuestionState(metaclass = abc.ABCMeta):
+class IQuestionType(metaclass = abc.ABCMeta):
     """
     Interface to define the methods used to decode answers from string base.
     The behavior used to this processed will change due to the question type.
@@ -17,6 +18,9 @@ class IQuestionState(metaclass = abc.ABCMeta):
     @abc.abstractmethod
     def get_answers(self):
         raise NotImplementedError
+    @abc.abstractmethod
+    def get_categories(self):
+        raise NotImplementedError
 
 class QuestionType(Enum):
     UNKNOW = 0
@@ -24,11 +28,19 @@ class QuestionType(Enum):
     CLOSED = 2
     CLOSED_MULTIPLE_CHOICE = 3
     CLOSED_CHECKBOX = 4
-    decode = {"0":"UNKNOW",
-             "1":"OPENED", 
-             "2":"CLOSED", 
-             "3":"CLOSED_MULTIPLE_CHOICE",
-             "4":"CLOSED_CHECKBOX"}
+
+decode_type_to_string = {QuestionType.UNKNOW:"UNKNOW",
+             QuestionType.OPENED:"OPENED", 
+             QuestionType.CLOSED:"CLOSED", 
+             QuestionType.CLOSED_MULTIPLE_CHOICE:"CLOSED_MULTIPLE_CHOICE",
+             QuestionType.CLOSED_CHECKBOX:"CLOSED_CHECKBOX"}
+
+decode_string_to_type = {"UNKNOW":QuestionType.UNKNOW,
+             "OPENED":QuestionType.OPENED, 
+             "CLOSED":QuestionType.CLOSED, 
+             "CLOSED_MULTIPLE_CHOICE":QuestionType.CLOSED_MULTIPLE_CHOICE,
+             "CLOSED_CHECKBOX":QuestionType.CLOSED_CHECKBOX}
+
     # print(self.__questionType__)
     # print(repr(self.__questionType__))
     # print(self.__questionType__.value)
@@ -53,6 +65,9 @@ class IQuestion(metaclass = abc.ABCMeta):
     @abc.abstractmethod
     def get_type(self):
         raise NotImplementedError
+    @abc.abstractmethod
+    def get_categories(self):
+        raise NotImplementedError
 
     @abc.abstractmethod
     def get_type_string(self):
@@ -67,9 +82,17 @@ class IQuestion(metaclass = abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
+    def get_state(self):
+        raise NotImplementedError
+    @abc.abstractmethod
+    def set_state(self, state:bool):
+        raise NotImplementedError
+
+
+    @abc.abstractmethod
     def change_type(self):
         raise NotImplementedError
-    
+
     """
     Private Methods
     """
@@ -82,12 +105,15 @@ class IQuestion(metaclass = abc.ABCMeta):
     @abc.abstractmethod
     def _figure_out_type(self):
         raise NotImplementedError
+    @abc.abstractmethod
+    def _get_type_object(self):
+        raise NotImplementedError
 
 
 """
 CONCRETE SECTION
 """
-class ConcreteQuestionsState(IQuestionState):
+class ConcreteQuestionsType(IQuestionType):
     def __init__(self, q):
         self.__question__ = q
         self.pre_process()
@@ -95,17 +121,28 @@ class ConcreteQuestionsState(IQuestionState):
         pass
     def get_answers(self):
         pass
-class OpenEndedState(ConcreteQuestionsState):
+    def get_categories(self):
+        return None
+
+class OpenEndedType(ConcreteQuestionsType):
+    def __init__(self, q):
+        super().__init__(q)
+        self.__question__.set_state(False)
     def get_answers(self):
         pass
 
-class ClosedEndedState(ConcreteQuestionsState):
+class ClosedEndedType(ConcreteQuestionsType):
     def __init__(self, q):
         super().__init__(q)
         self.__categories__ = []
+        self.__question__.set_state(False)
+
     def get_answers(self):
         pass
-class ClosedEndedMultipleChoiceState(ClosedEndedState):
+class ClosedEndedMultipleChoiceType(ClosedEndedType):
+    def __init__(self, q):
+        super().__init__(q)
+        self.__question__.set_state(True)
     def pre_process(self):
         self.__categories__ = self.get_categories()
         pass
@@ -123,6 +160,7 @@ class Question(IQuestion):
         self.__columnIndex__    = columnIndex
         self.__questionlabel__  = questionLabel
         self.__list_types__     = {}
+        self.__enabled__        = True
         self.change_type(self._figure_out_type())
         pass
     """
@@ -150,7 +188,7 @@ class Question(IQuestion):
 
         :return str: QuestionType enum decoded
         """
-        return QuestionType.decode(self.__questionType__)
+        return decode_type_to_string[self.__questionType__]
 
     def get_raw_answers(self):
         return self.__survey__.get_question_raw_answers(self.__columnIndex__)
@@ -158,6 +196,23 @@ class Question(IQuestion):
     def get_answers(self):
 
         pass
+    def get_categories(self):
+        return self._get_type_object().get_categories()
+
+    def get_state(self):
+        """
+        Get the question state
+        If True, it will be exported
+        It False, it will not be exported
+        """
+        return self.__enabled__
+
+    def set_state(self, state:bool):
+        """
+        Set the question state. If it join the export or not
+        """
+        self.__enabled__ = state
+    
     def change_type(self, questionTypeParam:QuestionType):
         """
         Method used to change question type. It already invoke the the private method _create_type. 
@@ -180,11 +235,11 @@ class Question(IQuestion):
         :param QuestionType questionTypeParam: Type of question you want to change into. 
         """
         if(questionTypeParam == QuestionType.OPENED):
-            self.__list_types__.setdefault(QuestionType.OPENED, OpenEndedState(self))
-        elif(questionTypeParam == QuestionType.OPENED):
-            self.__list_types__.setdefault(QuestionType.CLOSED, ClosedEndedState(self))
+            self.__list_types__.setdefault(QuestionType.OPENED, OpenEndedType(self))
+        elif(questionTypeParam == QuestionType.CLOSED):
+            self.__list_types__.setdefault(QuestionType.CLOSED, ClosedEndedType(self))
         elif(questionTypeParam == QuestionType.CLOSED_MULTIPLE_CHOICE):
-            self.__list_types__.setdefault(QuestionType.CLOSED_MULTIPLE_CHOICE, ClosedEndedMultipleChoiceState(self))
+            self.__list_types__.setdefault(QuestionType.CLOSED_MULTIPLE_CHOICE, ClosedEndedMultipleChoiceType(self))
     def _remove_type(self, questionTypeParam):
         """
         Remove an existing QuestionType from the list
@@ -210,3 +265,5 @@ class Question(IQuestion):
             else:
                 return QuestionType.CLOSED
         pass
+    def _get_type_object(self):
+        return self.__list_types__[self.__questionType__]

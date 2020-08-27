@@ -1,5 +1,6 @@
 import abc
 import pandas as pd
+import numpy as np
 import hamsa
 import hamsa.question
 import hamsa.instance
@@ -25,8 +26,23 @@ class ISurvey(metaclass = abc.ABCMeta):
     def get_questions_headings(self) -> list:
         raise NotImplementedError
     @abc.abstractmethod
+    def get_questions_labels(self) -> list:
+        raise NotImplementedError
+    @abc.abstractmethod
+    def get_questions_states(self) -> list:
+        raise NotImplementedError
+    @abc.abstractmethod
+    def get_questions_categories(self) -> list:
+        raise NotImplementedError
+
+    def get_questions_types(self)->list:
+        raise NotImplementedError
+
+    @abc.abstractmethod
     def get_questions_by_type(self) -> list:
         raise NotImplementedError
+
+
 
     @abc.abstractmethod
     def get_instance(self, i:int):
@@ -47,6 +63,9 @@ class ISurvey(metaclass = abc.ABCMeta):
 
     @abc.abstractmethod
     def get_report(self):
+        raise NotImplementedError
+    @abc.abstractmethod
+    def get_report_data(self):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -115,8 +134,21 @@ class Survey(ISurvey):
         """
         temp = []
         for i in range(len(self.__list_questions__)):
-            temp.append(self.get_question_heading(i))
+            temp.append(self.get_question_heading(i).replace('\t', ''))
         return temp
+    def get_questions_states(self)->list:
+        list_temp = []
+        for i in self.__list_questions__:
+            list_temp.append(i.get_state())
+        return list_temp
+    def get_questions_categories(self)->list:
+        """
+        Get a list of lists from the question's categories. If the question is opened the request will be None
+        """
+        list_temp = []
+        for i in self.__list_questions__:
+            list_temp.append(i.get_categories())
+        return list_temp
 
     def get_questions_by_type(self, typewanted:hamsa.question.QuestionType)-> list:
         """
@@ -129,6 +161,16 @@ class Survey(ISurvey):
         for  i in self.__list_questions__:
             if(i.get_type() == typewanted):
                 list_temp.append(i)
+        return list_temp
+    def get_questions_labels(self)->list:
+        list_temp = []
+        for i in self.__list_questions__:
+            list_temp.append(i.get_label())
+        return list_temp
+    def get_questions_types(self)->list:
+        list_temp = []
+        for i in self.__list_questions__:
+            list_temp.append(i.get_type_string())
         return list_temp
 
     def get_instance(self, rowindex):
@@ -178,6 +220,19 @@ class Survey(ISurvey):
         for key in self.__info__:
             text = text + str(key) + " >>>> " + str(self.__info__[key]) + "\n"
         return text
+    def get_report_data(self):
+        """
+        Return data to be used in Report screen
+        """
+        data = []
+        data.append(self.get_questions_labels())
+        data.append(self.get_questions_headings())
+        data.append(self.get_questions_types())
+        data.append(self.get_questions_states())
+        data.append(self.get_questions_categories())
+        ndata = np.array(data)
+        ndata = ndata.T
+        return ndata
 
     def _generate_statistics(self):
         """
