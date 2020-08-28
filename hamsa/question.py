@@ -19,6 +19,9 @@ class IQuestionType(metaclass = abc.ABCMeta):
     def get_answers(self):
         raise NotImplementedError
     @abc.abstractmethod
+    def get_answers_encoded(self):
+        raise NotImplementedError
+    @abc.abstractmethod
     def get_categories(self):
         raise NotImplementedError
 
@@ -78,7 +81,7 @@ class IQuestion(metaclass = abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_answers(self, i:int):
+    def get_answers_encoded(self):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -123,6 +126,8 @@ class ConcreteQuestionsType(IQuestionType):
         pass
     def get_categories(self):
         return None
+    def get_answers_encoded(self):
+        pass
 
 class OpenEndedType(ConcreteQuestionsType):
     def __init__(self, q):
@@ -133,23 +138,31 @@ class OpenEndedType(ConcreteQuestionsType):
 
 class ClosedEndedType(ConcreteQuestionsType):
     def __init__(self, q):
-        super().__init__(q)
         self.__categories__ = []
+        super().__init__(q)
         self.__question__.set_state(False)
-
     def get_answers(self):
         pass
+    def _extract_categories(self):
+        return self.__question__.get_raw_answers().unique()
+        
+
 class ClosedEndedMultipleChoiceType(ClosedEndedType):
     def __init__(self, q):
         super().__init__(q)
         self.__question__.set_state(True)
     def pre_process(self):
-        self.__categories__ = self.get_categories()
+        self.__categories__ = self._extract_categories()
         pass
     def get_answers(self):
-        pass
+        return self.__question__.get_raw_answers().copy()
+    def get_answers_encoded(self):
+        temp = self.get_answers()
+        for i in range(len(self.__categories__)):
+            temp.replace(self.__categories__[i], i, inplace = True)
+        return temp
     def get_categories(self):
-        return self.__question__.get_raw_answers().unique()
+        return self.get_categories()
 
 class Question(IQuestion):
     def __init__(self, surveyParam, columnIndex:int, questionLabel:str):
@@ -193,9 +206,10 @@ class Question(IQuestion):
     def get_raw_answers(self):
         return self.__survey__.get_question_raw_answers(self.__columnIndex__)
         
-    def get_answers(self):
-
-        pass
+    def get_answers_encoded(self):
+        temp = self._get_type_object().get_answers_encoded()
+        temp.rename(self.get_label(), inplace = True)
+        return temp
     def get_categories(self):
         return self._get_type_object().get_categories()
 

@@ -41,7 +41,9 @@ class ISurvey(metaclass = abc.ABCMeta):
     @abc.abstractmethod
     def get_questions_by_type(self) -> list:
         raise NotImplementedError
-
+    @abc.abstractmethod
+    def get_questions_by_state(self) -> list:
+        raise NotImplementedError
 
 
     @abc.abstractmethod
@@ -66,6 +68,10 @@ class ISurvey(metaclass = abc.ABCMeta):
         raise NotImplementedError
     @abc.abstractmethod
     def get_report_data(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def export_to_matlab(self, path):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -162,6 +168,18 @@ class Survey(ISurvey):
             if(i.get_type() == typewanted):
                 list_temp.append(i)
         return list_temp
+    def get_questions_by_state(self, statewanted:bool) -> list:
+        """
+        Get a list of questions filtered by state
+
+        :param bool statewanted: True means enabled False means disable
+        :return list: Questions filtered by given state
+        """
+        list_temp = []
+        for i in self.__list_questions__:
+            if(i.get_state()==statewanted):
+                list_temp.append(i)
+        return list_temp
     def get_questions_labels(self)->list:
         list_temp = []
         for i in self.__list_questions__:
@@ -233,7 +251,44 @@ class Survey(ISurvey):
         ndata = np.array(data)
         ndata = ndata.T
         return ndata
-
+    
+    def export_to_matlab(self, path):
+        temp = self.get_questions_by_state(True)
+        list_temp_encoded = []
+        list_labels = []
+        for i in temp:
+            list_labels.append(i.get_label())
+            list_temp_encoded.append(i.get_answers_encoded())
+        d = pd.concat(list_temp_encoded, axis=1)
+        rows = len(d.index)
+        cols = len(d.columns)
+        for j in range(cols):
+            val_max = d.iloc[:,j].max()
+            for i in range(rows):
+                d.iloc[i,j] = float(d.iloc[i,j]/val_max)
+        text_temp = self._format_data_to_matlab(d)
+        f = open(path, "w")
+        f.write(text_temp)
+        f.close()
+        return text_temp
+    def _format_data_to_matlab(self, df):
+        text = ""
+        text += str(len(df.columns)) + "\n"
+        text += "#n\t"
+        for i in df.columns[:-1]:
+            text += str(i)
+            text += '\t'
+        text += df.columns[-1]
+        text += '\n'
+        padroes = len(df)
+        for i in range(padroes):
+            linha = df.loc[i]
+            for j in df.columns[:-1]:
+                text += str(linha[j])
+                text += '\t'
+            text += str(linha[df.columns[-1]])
+            text += '\n'
+        return text
     def _generate_statistics(self):
         """
         This method is used to colect statistical information from survey and store it into __info__ dict
