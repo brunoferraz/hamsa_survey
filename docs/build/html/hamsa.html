@@ -245,20 +245,30 @@
 <div class="section" id="module-hamsa.question">
 <span id="hamsa-question-module"></span><h2>hamsa.question module<a class="headerlink" href="#module-hamsa.question" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="hamsa.question.IQuestionState">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">IQuestionState</code><a class="reference internal" href="_modules/hamsa/question.html#IQuestionState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionState" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.IQuestionType">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">IQuestionType</code><a class="reference internal" href="_modules/hamsa/question.html#IQuestionType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Interface to define the methods used to decode answers from string base.
 The behavior used to this processed will change due to the question type.
 This abstraction works like a Type for the question.</p>
 <dl class="py method">
-<dt id="hamsa.question.IQuestionState.pre_process">
-<em class="property">abstract </em><code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestionState.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionState.pre_process" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.IQuestionType.pre_process">
+<em class="property">abstract </em><code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestionType.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionType.pre_process" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="hamsa.question.IQuestionState.get_answers">
-<em class="property">abstract </em><code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestionState.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionState.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.IQuestionType.get_answers">
+<em class="property">abstract </em><code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestionType.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionType.get_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.IQuestionType.get_answers_encoded">
+<em class="property">abstract </em><code class="sig-name descname">get_answers_encoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestionType.get_answers_encoded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionType.get_answers_encoded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.IQuestionType.get_categories">
+<em class="property">abstract </em><code class="sig-name descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestionType.get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestionType.get_categories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -293,11 +303,6 @@ This abstraction works like a Type for the question.</p>
 <code class="sig-name descname">CLOSED_CHECKBOX</code><em class="property"> = 4</em><a class="headerlink" href="#hamsa.question.QuestionType.CLOSED_CHECKBOX" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt id="hamsa.question.QuestionType.decode">
-<code class="sig-name descname">decode</code><em class="property"> = {'0': 'UNKNOW', '1': 'OPENED', '2': 'CLOSED', '3': 'CLOSED_MULTIPLE_CHOICE', '4': 'CLOSED_CHECKBOX'}</em><a class="headerlink" href="#hamsa.question.QuestionType.decode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -326,6 +331,11 @@ This abstraction works like a Type for the question.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt id="hamsa.question.IQuestion.get_categories">
+<em class="property">abstract </em><code class="sig-name descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_categories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.question.IQuestion.get_type_string">
 <em class="property">abstract </em><code class="sig-name descname">get_type_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_type_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_type_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -336,8 +346,18 @@ This abstraction works like a Type for the question.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="hamsa.question.IQuestion.get_answers">
-<em class="property">abstract </em><code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.IQuestion.get_answers_encoded">
+<em class="property">abstract </em><code class="sig-name descname">get_answers_encoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_answers_encoded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_answers_encoded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.IQuestion.get_state">
+<em class="property">abstract </em><code class="sig-name descname">get_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.get_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.get_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.IQuestion.set_state">
+<em class="property">abstract </em><code class="sig-name descname">set_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#IQuestion.set_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.IQuestion.set_state" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -348,60 +368,75 @@ This abstraction works like a Type for the question.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="hamsa.question.ConcreteQuestionsState">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ConcreteQuestionsState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestionState" title="hamsa.question.IQuestionState"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestionState</span></code></a></p>
+<dt id="hamsa.question.ConcreteQuestionsType">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ConcreteQuestionsType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.IQuestionType" title="hamsa.question.IQuestionType"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.IQuestionType</span></code></a></p>
 <dl class="py method">
-<dt id="hamsa.question.ConcreteQuestionsState.pre_process">
-<code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsState.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsState.pre_process" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.ConcreteQuestionsType.pre_process">
+<code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsType.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsType.pre_process" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="hamsa.question.ConcreteQuestionsState.get_answers">
-<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsState.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsState.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.ConcreteQuestionsType.get_answers">
+<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsType.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsType.get_answers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt id="hamsa.question.OpenEndedState">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">OpenEndedState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#OpenEndedState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.OpenEndedState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#hamsa.question.ConcreteQuestionsState" title="hamsa.question.ConcreteQuestionsState"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.ConcreteQuestionsState</span></code></a></p>
 <dl class="py method">
-<dt id="hamsa.question.OpenEndedState.get_answers">
-<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#OpenEndedState.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.OpenEndedState.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.ConcreteQuestionsType.get_categories">
+<code class="sig-name descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsType.get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsType.get_categories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt id="hamsa.question.ClosedEndedState">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ClosedEndedState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#hamsa.question.ConcreteQuestionsState" title="hamsa.question.ConcreteQuestionsState"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.ConcreteQuestionsState</span></code></a></p>
 <dl class="py method">
-<dt id="hamsa.question.ClosedEndedState.get_answers">
-<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedState.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedState.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.ConcreteQuestionsType.get_answers_encoded">
+<code class="sig-name descname">get_answers_encoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ConcreteQuestionsType.get_answers_encoded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ConcreteQuestionsType.get_answers_encoded" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="hamsa.question.ClosedEndedMultipleChoiceState">
-<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ClosedEndedMultipleChoiceState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#hamsa.question.ClosedEndedState" title="hamsa.question.ClosedEndedState"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.ClosedEndedState</span></code></a></p>
+<dt id="hamsa.question.OpenEndedType">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">OpenEndedType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#OpenEndedType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.OpenEndedType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.ConcreteQuestionsType" title="hamsa.question.ConcreteQuestionsType"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.ConcreteQuestionsType</span></code></a></p>
 <dl class="py method">
-<dt id="hamsa.question.ClosedEndedMultipleChoiceState.pre_process">
-<code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceState.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceState.pre_process" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.OpenEndedType.get_answers">
+<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#OpenEndedType.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.OpenEndedType.get_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="hamsa.question.ClosedEndedType">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ClosedEndedType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.ConcreteQuestionsType" title="hamsa.question.ConcreteQuestionsType"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.ConcreteQuestionsType</span></code></a></p>
+<dl class="py method">
+<dt id="hamsa.question.ClosedEndedType.get_answers">
+<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedType.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedType.get_answers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="hamsa.question.ClosedEndedMultipleChoiceType">
+<em class="property">class </em><code class="sig-prename descclassname">hamsa.question.</code><code class="sig-name descname">ClosedEndedMultipleChoiceType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#hamsa.question.ClosedEndedType" title="hamsa.question.ClosedEndedType"><code class="xref py py-class docutils literal notranslate"><span class="pre">hamsa.question.ClosedEndedType</span></code></a></p>
+<dl class="py method">
+<dt id="hamsa.question.ClosedEndedMultipleChoiceType.pre_process">
+<code class="sig-name descname">pre_process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceType.pre_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceType.pre_process" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="hamsa.question.ClosedEndedMultipleChoiceState.get_answers">
-<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceState.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceState.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.ClosedEndedMultipleChoiceType.get_answers">
+<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceType.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceType.get_answers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="hamsa.question.ClosedEndedMultipleChoiceState.get_categories">
-<code class="sig-name descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceState.get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceState.get_categories" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.ClosedEndedMultipleChoiceType.get_answers_encoded">
+<code class="sig-name descname">get_answers_encoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceType.get_answers_encoded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceType.get_answers_encoded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.ClosedEndedMultipleChoiceType.get_categories">
+<code class="sig-name descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#ClosedEndedMultipleChoiceType.get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.ClosedEndedMultipleChoiceType.get_categories" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -453,9 +488,28 @@ This abstraction works like a Type for the question.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="hamsa.question.Question.get_answers">
-<code class="sig-name descname">get_answers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.get_answers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.get_answers" title="Permalink to this definition">¶</a></dt>
+<dt id="hamsa.question.Question.get_answers_encoded">
+<code class="sig-name descname">get_answers_encoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.get_answers_encoded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.get_answers_encoded" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.Question.get_categories">
+<code class="sig-name descname">get_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.get_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.get_categories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.Question.get_state">
+<code class="sig-name descname">get_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.get_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.get_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the question state
+If True, it will be exported
+It False, it will not be exported</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.question.Question.set_state">
+<code class="sig-name descname">set_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/question.html#Question.set_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.question.Question.set_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the question state. If it join the export or not</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="hamsa.question.Question.change_type">
@@ -505,8 +559,33 @@ There, the state will be created since it have not been created already</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_questions_labels">
+<em class="property">abstract </em><code class="sig-name descname">get_questions_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_questions_states">
+<em class="property">abstract </em><code class="sig-name descname">get_questions_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions_states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_questions_categories">
+<em class="property">abstract </em><code class="sig-name descname">get_questions_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions_categories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_questions_types">
+<code class="sig-name descname">get_questions_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions_types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.survey.ISurvey.get_questions_by_type">
 <em class="property">abstract </em><code class="sig-name descname">get_questions_by_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions_by_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions_by_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_questions_by_state">
+<em class="property">abstract </em><code class="sig-name descname">get_questions_by_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_questions_by_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_questions_by_state" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -532,6 +611,16 @@ There, the state will be created since it have not been created already</p>
 <dl class="py method">
 <dt id="hamsa.survey.ISurvey.get_report">
 <em class="property">abstract </em><code class="sig-name descname">get_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.ISurvey.get_report_data">
+<em class="property">abstract </em><code class="sig-name descname">get_report_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.get_report_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.get_report_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.ISurvey.export_to_matlab">
+<em class="property">abstract </em><code class="sig-name descname">export_to_matlab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#ISurvey.export_to_matlab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.ISurvey.export_to_matlab" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -595,6 +684,17 @@ There, the state will be created since it have not been created already</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="hamsa.survey.Survey.get_questions_states">
+<code class="sig-name descname">get_questions_states</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions_states"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions_states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.get_questions_categories">
+<code class="sig-name descname">get_questions_categories</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions_categories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions_categories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of lists from the question’s categories. If the question is opened the request will be None</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="hamsa.survey.Survey.get_questions_by_type">
 <code class="sig-name descname">get_questions_by_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">typewanted</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#hamsa.question.QuestionType" title="hamsa.question.QuestionType">hamsa.question.QuestionType</a></span></em><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions_by_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions_by_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of questions filtered by type</p>
@@ -607,6 +707,30 @@ There, the state will be created since it have not been created already</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.get_questions_by_state">
+<code class="sig-name descname">get_questions_by_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">statewanted</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions_by_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions_by_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of questions filtered by state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>statewanted</strong> (<em>bool</em>) – True means enabled False means disable</p>
+</dd>
+<dt class="field-even">Return list</dt>
+<dd class="field-even"><p>Questions filtered by given state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.get_questions_labels">
+<code class="sig-name descname">get_questions_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.get_questions_types">
+<code class="sig-name descname">get_questions_types</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_questions_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_questions_types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="hamsa.survey.Survey.get_instance">
@@ -673,6 +797,17 @@ There, the state will be created since it have not been created already</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.get_report_data">
+<code class="sig-name descname">get_report_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.get_report_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.get_report_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data to be used in Report screen</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="hamsa.survey.Survey.export_to_matlab">
+<code class="sig-name descname">export_to_matlab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/hamsa/survey.html#Survey.export_to_matlab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#hamsa.survey.Survey.export_to_matlab" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

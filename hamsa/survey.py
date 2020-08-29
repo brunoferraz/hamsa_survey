@@ -260,6 +260,7 @@ class Survey(ISurvey):
             list_labels.append(i.get_label())
             list_temp_encoded.append(i.get_answers_encoded())
         d = pd.concat(list_temp_encoded, axis=1)
+        print(d)
         rows = len(d.index)
         cols = len(d.columns)
         for j in range(cols):

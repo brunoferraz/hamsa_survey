@@ -153,6 +153,7 @@
   <h1>Source code for hamsa.survey</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">abc</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">hamsa</span>
 <span class="kn">import</span> <span class="nn">hamsa.question</span>
 <span class="kn">import</span> <span class="nn">hamsa.instance</span>
@@ -177,9 +178,26 @@
 <div class="viewcode-block" id="ISurvey.get_questions_headings"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_headings">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_questions_headings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_questions_labels"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_labels">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_questions_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_questions_states"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_states">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_questions_states</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_questions_categories"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_categories">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_questions_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="ISurvey.get_questions_types"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_types">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 <div class="viewcode-block" id="ISurvey.get_questions_by_type"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_by_type">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_questions_by_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_questions_by_state"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_questions_by_state">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_questions_by_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
 
 <div class="viewcode-block" id="ISurvey.get_instance"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_instance">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
@@ -200,6 +218,13 @@
 
 <div class="viewcode-block" id="ISurvey.get_report"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_report">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<div class="viewcode-block" id="ISurvey.get_report_data"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.get_report_data">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_report_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="ISurvey.export_to_matlab"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.ISurvey.export_to_matlab">[docs]</a>    <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">export_to_matlab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
@@ -268,8 +293,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">)):</span>
-            <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_question_heading</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_question_heading</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">temp</span></div>
+<div class="viewcode-block" id="Survey.get_questions_states"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_states">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_states</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+        <span class="n">list_temp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">:</span>
+            <span class="n">list_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_state</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">list_temp</span></div>
+<div class="viewcode-block" id="Survey.get_questions_categories"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_categories">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of lists from the question&#39;s categories. If the question is opened the request will be None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_temp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">:</span>
+            <span class="n">list_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_categories</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">list_temp</span></div>
 
 <div class="viewcode-block" id="Survey.get_questions_by_type"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_by_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_by_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typewanted</span><span class="p">:</span><span class="n">hamsa</span><span class="o">.</span><span class="n">question</span><span class="o">.</span><span class="n">QuestionType</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -282,6 +320,28 @@
         <span class="k">for</span>  <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">:</span>
             <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">typewanted</span><span class="p">):</span>
                 <span class="n">list_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">list_temp</span></div>
+<div class="viewcode-block" id="Survey.get_questions_by_state"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_by_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_by_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">statewanted</span><span class="p">:</span><span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a list of questions filtered by state</span>
+
+<span class="sd">        :param bool statewanted: True means enabled False means disable</span>
+<span class="sd">        :return list: Questions filtered by given state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_temp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span><span class="o">==</span><span class="n">statewanted</span><span class="p">):</span>
+                <span class="n">list_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">list_temp</span></div>
+<div class="viewcode-block" id="Survey.get_questions_labels"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_labels">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+        <span class="n">list_temp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">:</span>
+            <span class="n">list_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_label</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">list_temp</span></div>
+<div class="viewcode-block" id="Survey.get_questions_types"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_questions_types">[docs]</a>    <span class="k">def</span> <span class="nf">get_questions_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">list</span><span class="p">:</span>
+        <span class="n">list_temp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__list_questions__</span><span class="p">:</span>
+            <span class="n">list_temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_type_string</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">list_temp</span></div>
 
 <div class="viewcode-block" id="Survey.get_instance"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_instance">[docs]</a>    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rowindex</span><span class="p">):</span>
@@ -331,7 +391,57 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__info__</span><span class="p">:</span>
             <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &gt;&gt;&gt;&gt; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__info__</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">text</span></div>
-
+<div class="viewcode-block" id="Survey.get_report_data"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.get_report_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_report_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return data to be used in Report screen</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_questions_labels</span><span class="p">())</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_questions_headings</span><span class="p">())</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_questions_types</span><span class="p">())</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_questions_states</span><span class="p">())</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_questions_categories</span><span class="p">())</span>
+        <span class="n">ndata</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">ndata</span> <span class="o">=</span> <span class="n">ndata</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">ndata</span></div>
+    
+<div class="viewcode-block" id="Survey.export_to_matlab"><a class="viewcode-back" href="../../hamsa.html#hamsa.survey.Survey.export_to_matlab">[docs]</a>    <span class="k">def</span> <span class="nf">export_to_matlab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_questions_by_state</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">list_temp_encoded</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">list_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="n">list_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_label</span><span class="p">())</span>
+            <span class="n">list_temp_encoded</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_answers_encoded</span><span class="p">())</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">list_temp_encoded</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+            <span class="n">val_max</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">val_max</span><span class="p">)</span>
+        <span class="n">text_temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_data_to_matlab</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text_temp</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">text_temp</span></div>
+    <span class="k">def</span> <span class="nf">_format_data_to_matlab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;#n</span><span class="se">\t</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">padroes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">padroes</span><span class="p">):</span>
+            <span class="n">linha</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">linha</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">linha</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">text</span>
     <span class="k">def</span> <span class="nf">_generate_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method is used to colect statistical information from survey and store it into __info__ dict</span>

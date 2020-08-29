@@ -32,7 +32,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.myTableWidget.setModel(self.model)
 
 if __name__ == "__main__":
-    ds = hs.read_csv("data/fofoca_ajustado.csv", token=";")
+    ds = hs.read_csv("data/interface_example.csv", token=";")
     ds.export_to_matlab("matlaba.data")
     print('exported')
     # app = QtWidgets.QApplication(sys.argv)
