@@ -1,2 +1,5 @@
 # hamsa_survey
-Projeto da disciplina projeto final
+Projeto Final de Programação – INF2102
+
+Entrega com avaliação [Link]
+
