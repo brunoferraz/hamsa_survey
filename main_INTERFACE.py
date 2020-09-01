@@ -7,10 +7,8 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from interface.hamsaView import TableModel
-# from interface.hamsaViewWidget import TableModel
 from interface.report import Ui_MainWindow
 
-# from hamsa import question
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
@@ -19,21 +17,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ds = hs.read_csv("data/fofoca_ajustado.csv", token=";")
         self.summaryReport.setText(self.ds.get_report())
 
-        # # t = QtWidgets.QTableView()
-        # # data = self.ds.get_questions_labels()
-        # # l = []
-        # # l.append(data)
-        # # l.append(self.ds.get_questions_headings())
-        # # l.append(self.ds.get_questions_types())
-
-        # # ndata = np.array(l)
-        # # ndata = ndata.T
         self.model = TableModel(["Label", "Question", "Type"], self.ds.get_report_data())
         self.tableView.setModel(self.model)
-        # # header = self.tableView.horizontalHeader()
-        # # header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
-        # # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
-        # # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
         self.tableView.setColumnWidth(1, 450)
         self.tableView.setColumnWidth(2, 200)
         self.tableView.setColumnWidth(3, 50)
