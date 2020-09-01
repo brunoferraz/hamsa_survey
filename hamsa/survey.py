@@ -1,3 +1,4 @@
+"""Written by Bruno Ferraz (brunoferraz.pro@gmail.com)"""
 import abc
 import pandas as pd
 import numpy as np

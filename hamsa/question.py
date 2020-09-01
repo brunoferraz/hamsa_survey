@@ -1,3 +1,4 @@
+"""Written by Bruno Ferraz (brunoferraz.pro@gmail.com)"""
 import abc
 from enum import Enum
 from hamsa import heuristics

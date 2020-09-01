@@ -1,3 +1,4 @@
+"""Written by Bruno Ferraz (brunoferraz.pro@gmail.com)"""
 """
 This module is used to store all heuristics values as constants.
 

@@ -1,3 +1,4 @@
+"""Written by Bruno Ferraz (brunoferraz.pro@gmail.com)"""
 import abc
 
 class IInstance(metaclass = abc.ABCMeta):
