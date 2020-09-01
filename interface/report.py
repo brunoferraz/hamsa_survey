@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(790, 520, 75, 23))
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setObjectName("Export")
         self.tableView = QtWidgets.QTableView(self.centralwidget)
         self.tableView.setGeometry(QtCore.QRect(10, 100, 851, 411))
         self.tableView.setToolTipDuration(5)
@@ -43,5 +43,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton.setText(_translate("MainWindow", "Export"))
         self.summaryReport.setText(_translate("MainWindow", "Relatorio Resumido"))

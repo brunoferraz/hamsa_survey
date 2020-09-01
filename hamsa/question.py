@@ -162,7 +162,7 @@ class ClosedEndedMultipleChoiceType(ClosedEndedType):
             temp.replace(self.__categories__[i], i, inplace = True)
         return temp
     def get_categories(self):
-        return self.get_categories()
+        return self.__categories__
 
 class Question(IQuestion):
     def __init__(self, surveyParam, columnIndex:int, questionLabel:str):

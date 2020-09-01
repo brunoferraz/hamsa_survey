@@ -8,8 +8,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from interface.hamsaView import TableModel
 # from interface.hamsaViewWidget import TableModel
-# from interface.report import Ui_MainWindow
-from interface.report_screen import Ui_MainWindow
+from interface.report import Ui_MainWindow
 
 # from hamsa import question
 
@@ -20,26 +19,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ds = hs.read_csv("data/fofoca_ajustado.csv", token=";")
         self.summaryReport.setText(self.ds.get_report())
 
-        data = self.ds.get_report_data()
-        # print(data.shape[0])
+        # # t = QtWidgets.QTableView()
+        # # data = self.ds.get_questions_labels()
+        # # l = []
+        # # l.append(data)
+        # # l.append(self.ds.get_questions_headings())
+        # # l.append(self.ds.get_questions_types())
 
-        # self.tableWidget = QtWidgets.QTableWidget(data.shape[0],data.shape[1],self)
-        # self.tableWidget = 
-        # self.myTableWidget.setRowCount(data.shape[0])
-        # self.myTableWidget.setColumnCount(data.shape[1])
-        # self.myTableWidget.setModel()
-        self.model = TableModel(["Label","Question","Type"],data, self)
-        self.myTableWidget.setModel(self.model)
+        # # ndata = np.array(l)
+        # # ndata = ndata.T
+        self.model = TableModel(["Label", "Question", "Type"], self.ds.get_report_data())
+        self.tableView.setModel(self.model)
+        # # header = self.tableView.horizontalHeader()
+        # # header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        # # header.setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        # # header.setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        self.tableView.setColumnWidth(1, 450)
+        self.tableView.setColumnWidth(2, 200)
+        self.tableView.setColumnWidth(3, 50)
+        self.tableView.hideColumn(4)
+
+
 
 if __name__ == "__main__":
-    ds = hs.read_csv("data/interface_example.csv", token=";")
-    ds.export_to_matlab("matlaba.data")
-    print('exported')
-    # app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
-    # window = MainWindow()
-    # window.show()
-    # app.exec_()
+    window = MainWindow()
+    window.show()
+    app.exec_()
 
 # print(tela.layou)
 # f = ds.get_questions_headings()

@@ -8,8 +8,8 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            // "program": "${file}",
-            "program": "main_teste.py",
+            "program": "${file}",
+            // "program": "main_teste.py",
             "console": "integratedTerminal"
         }
     ]
